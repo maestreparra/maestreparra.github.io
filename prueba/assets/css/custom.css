@@ -1,0 +1,76 @@
+/* Add here all your css styles (customizations) */
+
+
+/*chrome*/
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    background-color: #151515;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: #151515;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0);
+    background-color: #BA2626;
+}
+
+
+/*chrome*/
+
+
+/*opera*/
+
+::-o-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    background-color: #151515;
+}
+
+::-o-scrollbar {
+    width: 12px;
+    background-color: #151515;
+}
+
+::-o-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0);
+    background-color: #FC3A06;
+}
+
+
+/*opera*/
+
+
+/*mozilla*/
+
+::-moz-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    background-color: #151515;
+}
+
+::-moz-scrollbar {
+    width: 12px;
+    background-color: #151515;
+}
+
+::-moz-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0);
+    background-color: #BA2626;
+}
+
+
+/*mozilla*/
+
+.txt-v1 {
+    z-index: 1;
+    position: relative;
+    margin-bottom: 60px;
+}
