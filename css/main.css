@@ -3,20 +3,20 @@
 {
 	-webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0);
 	border-radius: 10px;
-	background-color: #FFFFFF;
+	background-color: #FC3A06;
 }
 
 ::-webkit-scrollbar
 {
 	width: 12px;
-	background-color: #FFFFFF;
+	background-color: #FC3A06;
 }
 
 ::-webkit-scrollbar-thumb
 {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0);
-	background-color: #FC3A06;
+	background-color: #FFFFFF;
 }
 /*chrome*/
 /*opera*/
@@ -24,20 +24,20 @@
 {
 	-webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0);
 	border-radius: 10px;
-	background-color: #FFFFFF;
+	background-color: #FC3A06;
 }
 
 ::-o-scrollbar
 {
 	width: 12px;
-	background-color: #FFFFFF;
+	background-color: #FC3A06;
 }
 
 ::-o-scrollbar-thumb
 {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0);
-	background-color: #FC3A06;
+	background-color: #FFFFFF;
 }
 /*opera*/
 /*mozilla*/
@@ -45,20 +45,20 @@
 {
 	-webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0);
 	border-radius: 10px;
-	background-color: #FFFFFF;
+	background-color: #FC3A06;
 }
 
 ::-moz-scrollbar
 {
 	width: 12px;
-	background-color: #FFFFFF;
+	background-color: #FC3A06;
 }
 
 ::-moz-scrollbar-thumb
 {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0);
-	background-color: #FC3A06;
+	background-color: #FFFFFF;
 }
 /*mozilla*/
 
@@ -286,7 +286,7 @@ body {
   font-feature-settings: "kern", "liga", "frac", "pnum";
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  background-color: rgba(235,83,36,1);
+  background-color: #FC3A06;
   color: #ced9e0;
   font-family: "font-family: " Helvetica Neue ",Helvetica,Arial,sans-serif";
   font-size: 1em;
