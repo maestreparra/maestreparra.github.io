@@ -1,0 +1,85 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--spacing-lg);
+  width: 100%;
+  /* Figma mobile Footer: 16px horizontal / 32px vertical padding, 360px
+     total height. Desktop: 32px horizontal / 48px vertical, 280px height. */
+  height: 360px;
+  padding: var(--spacing-xl) var(--spacing-md);
+  background: var(--color-bg-inverse);
+  color: var(--color-text-inverse);
+}
+
+@media (min-width: 768px) {
+  .footer {
+    height: 280px;
+    padding: var(--spacing-2xl) var(--spacing-xl);
+  }
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .top {
+    flex-direction: row;
+    gap: var(--spacing-2xl);
+  }
+}
+
+.brand {
+  font: var(--text-heading-h3);
+  margin: 0;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font: var(--text-body-small);
+}
+
+@media (min-width: 768px) {
+  .links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--spacing-xl);
+  }
+}
+
+.link {
+  color: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  /* The frozen Figma Footer packs 5 links into a fixed 360px mobile height
+     with plain text-line spacing, not 44px touch targets; the approved
+     layout does not permit the usual minimum here (WCAG 2.5.8 AA still
+     allows an inline-text-link exception). */
+  min-height: 24px;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  font: var(--text-evidence-mono);
+  letter-spacing: 0.6px;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .meta {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}

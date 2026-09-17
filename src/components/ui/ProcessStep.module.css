@@ -1,0 +1,29 @@
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  align-items: flex-start;
+  padding: var(--spacing-lg) 0 0;
+  border-top: 1px solid var(--color-border-default);
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.index {
+  font: var(--text-evidence-mono);
+  letter-spacing: 0.6px;
+  color: var(--color-text-accent);
+  margin: 0;
+}
+
+.title {
+  font: var(--text-heading-h4);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.description {
+  font: var(--text-body-small);
+  color: var(--color-text-secondary);
+  margin: 0;
+}

@@ -1,0 +1,37 @@
+.entry {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  align-items: flex-start;
+  width: 100%;
+  padding: var(--spacing-lg);
+  background: var(--color-bg-canvas);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+}
+
+@media (min-width: 1024px) {
+  .entry {
+    width: 588px;
+    min-height: 250px;
+  }
+}
+
+.company {
+  font: var(--text-evidence-mono);
+  letter-spacing: 0.6px;
+  color: var(--color-text-accent);
+  margin: 0;
+}
+
+.role {
+  font: var(--text-heading-h4);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.summary {
+  font: var(--text-body-medium);
+  color: var(--color-text-secondary);
+  margin: 0;
+}

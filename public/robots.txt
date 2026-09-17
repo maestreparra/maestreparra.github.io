@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /es/
+Allow: /en/
+Disallow: /$
+
+Sitemap: https://maestreparra.github.io/sitemap.xml

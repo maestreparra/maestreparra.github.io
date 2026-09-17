@@ -1,0 +1,143 @@
+.section {
+  width: 100%;
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 64px 80px;
+  }
+}
+
+.inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 1024px) {
+  .inner {
+    max-width: 1200px;
+    gap: var(--spacing-lg);
+  }
+}
+
+.heading {
+  font: var(--text-heading-h3);
+  letter-spacing: -0.4px;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+@media (min-width: 1024px) {
+  .heading {
+    font: var(--text-heading-h2);
+    letter-spacing: -1px;
+  }
+}
+
+.body {
+  font: var(--text-body-medium);
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .body {
+    font: var(--text-body-large);
+    max-width: 900px;
+  }
+}
+
+/*
+ * Figma's mobile Contact Links section is 360px wide with ~15px side
+ * insets (23:8, 23:15) — wider than the 342px/24px column every other
+ * Core Pages section uses. Only this section gets the override; Contact's
+ * own Hero and Privacy blocks keep the standard .section/.inner width.
+ */
+.linksSection {
+  width: 100%;
+  padding: var(--spacing-2xl) 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .linksSection {
+    padding: 64px 80px;
+  }
+}
+
+.linksInner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 1024px) {
+  .linksInner {
+    max-width: 1200px;
+    gap: var(--spacing-lg);
+  }
+}
+
+.linkGrid {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 1024px) {
+  .linkGrid {
+    flex-direction: row;
+    gap: var(--spacing-lg);
+  }
+}
+
+/*
+ * Figma's Privacy frame has no separate outer section padding — its own
+ * box (py-32/px-24 on mobile, p-48 on desktop) is the only spacing between
+ * it and the adjacent sections (23:8, 23:15: Links ends and Privacy starts
+ * at the same y with zero gap). The generic .section wrapper's extra 48px
+ * vertical padding was double-counting on top of .privacy's own padding.
+ */
+.privacySection {
+  width: 100%;
+  padding: 0 var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  /* Desktop Contact (23:7, 23:14) was already within ~0.3% of Figma before
+     this correction — only the mobile double-padding needed removing. */
+  .privacySection {
+    padding: 64px 80px;
+  }
+}
+
+.privacy {
+  background: var(--color-bg-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl) var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .privacy {
+    max-width: 1200px;
+    padding: 48px;
+  }
+}

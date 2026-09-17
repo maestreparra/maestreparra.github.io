@@ -1,0 +1,271 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.section {
+  width: 100%;
+  /* Figma mobile sections use 24px horizontal padding (content width 342px
+     inside the 390px frame); desktop uses 80px. */
+  padding: var(--spacing-2xl) var(--spacing-lg);
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 96px 80px;
+  }
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.eyebrow {
+  font: var(--text-evidence-mono);
+  letter-spacing: 0.6px;
+  color: var(--color-text-accent);
+  margin: 0;
+}
+
+.headline {
+  font: var(--text-display-hero-mobile);
+  /* Figma "Display/Hero Mobile" tracking is -1px; without it, text wraps an
+     extra line versus the frozen frame. `font` shorthand cannot express
+     letter-spacing, so it is set separately. */
+  letter-spacing: -1px;
+  color: var(--color-text-primary);
+  margin: 0;
+  max-width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .headline {
+    font: var(--text-display-hero);
+    letter-spacing: -2px;
+    /* Exact Figma H1 box width (1120px desktop) — a ch-based width wrapped
+       one extra line versus the frozen frame, adding a full 80px line box
+       to the Hero's measured height. */
+    max-width: 1120px;
+  }
+}
+
+.introduction {
+  font: var(--text-body-medium);
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .introduction {
+    font: var(--text-body-large);
+    max-width: 1040px;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  align-items: flex-start;
+}
+
+@media (min-width: 640px) {
+  .actions {
+    flex-direction: row;
+  }
+}
+
+.context {
+  font: var(--text-evidence-mono);
+  letter-spacing: 0.6px;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.evidence {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  background: var(--color-bg-surface);
+  /* Figma Evidence band uses 32/24px padding (mobile) and 48/80px (desktop)
+     — lighter than the other sections' 48/24 and 96/80 — so it needs its
+     own override instead of the shared .section padding. */
+  padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+@media (min-width: 1024px) {
+  .evidence {
+    padding: var(--spacing-2xl) 80px;
+  }
+}
+
+/* Evidence labels are 342 x 104 (mobile) / ~296 x 104 (desktop), per Figma.
+   `flex-basis` set unconditionally here previously forced 220px on the
+   MAIN axis, which in a column container (mobile) is height, not width —
+   inflating each label to 220px tall instead of 104px. Width/height are
+   set structurally here (not in EvidenceLabel.module.css, which declares
+   neither) so both breakpoints get their exact box size without touching
+   a file outside this correction's allowlist. */
+.evidence > * {
+  width: 100%;
+  height: 104px;
+}
+
+@media (min-width: 1024px) {
+  .evidence {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+  }
+
+  .evidence > * {
+    flex: 1 1 296px;
+    width: auto;
+  }
+}
+
+.selectedWorkHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.title2 {
+  font: var(--text-heading-h2);
+  /* Figma "Heading/H2" tracking is -1px at every breakpoint. */
+  letter-spacing: -1px;
+  color: var(--color-text-primary);
+  margin: 0;
+  max-width: 100%;
+}
+
+.body2 {
+  font: var(--text-body-large);
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 100%;
+}
+
+/* Exact Figma content-box widths per section (desktop only — mobile content
+   is already constrained by the 342px column). A ch-based width wrapped
+   extra lines versus the frozen frames, inflating measured section height. */
+@media (min-width: 1024px) {
+  .selectedWorkHeader .title2 {
+    max-width: 1000px;
+  }
+
+  .selectedWorkHeader .body2 {
+    max-width: 900px;
+  }
+
+  .experience .title2 {
+    max-width: 1080px;
+  }
+
+  .experience .body2 {
+    max-width: 1000px;
+  }
+
+  .method .title2 {
+    max-width: 1000px;
+  }
+
+  .closing .title2 {
+    max-width: 1000px;
+  }
+
+  .closing .body2 {
+    max-width: 900px;
+  }
+}
+
+.projectList {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--spacing-lg);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 1024px) {
+  .projectList {
+    flex-direction: row;
+  }
+}
+
+.experience {
+  background: var(--color-bg-inverse);
+  color: var(--color-text-inverse);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* Figma Experience and Closing CTA use uniform 80px padding at desktop
+   (not the 96px vertical the other sections use). */
+@media (min-width: 1024px) {
+  .experience,
+  .closing {
+    padding: 80px;
+  }
+}
+
+.experience .title2,
+.experience .body2 {
+  color: var(--color-text-inverse);
+}
+
+.experience .eyebrow {
+  color: var(--color-text-accent-on-inverse);
+}
+
+.method {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.stepList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 1024px) {
+  .stepList {
+    flex-direction: row;
+  }
+
+  /* Figma Process Step is 190px tall at desktop (row layout). ProcessStep
+     (outside this correction's allowlist) does not declare a height, so it
+     is set structurally here with no specificity conflict. Mobile already
+     lands within tolerance from its natural (shorter, column-stacked)
+     content height and does not need this. */
+  .stepList > li {
+    min-height: 190px;
+  }
+}
+
+.closing {
+  background: var(--color-bg-accent);
+  color: var(--color-text-inverse);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-lg);
+}
+
+.closing .title2,
+.closing .body2 {
+  color: var(--color-text-inverse);
+}

@@ -1,0 +1,157 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-md);
+  background: var(--color-bg-canvas);
+  border-bottom: 1px solid var(--color-border-default);
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  .header {
+    padding: var(--spacing-lg) var(--spacing-xl);
+  }
+}
+
+.brand {
+  font: var(--text-heading-h4);
+  color: var(--color-text-primary);
+  margin: 0;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Mobile disclosure (< 768px): reproduces the Figma "ES/EN · Menu" affordance. */
+.mobileNavDisclosure {
+  position: relative;
+}
+
+.navSummary {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  min-height: 44px;
+  padding: 0 4px;
+  font: var(--text-ui-navigation);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  list-style: none;
+}
+
+.navSummary::-webkit-details-marker {
+  display: none;
+}
+
+.localeGroupCompact {
+  color: var(--color-text-secondary);
+}
+
+.mobileNav {
+  position: absolute;
+  right: 0;
+  top: calc(100% + var(--spacing-sm));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-lg);
+  background: var(--color-bg-canvas);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  min-width: 220px;
+  z-index: 10;
+}
+
+/* Desktop nav (>= 768px): always in normal flow, never inside <details>. */
+.desktopNav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .mobileNavDisclosure {
+    display: none;
+  }
+
+  .desktopNav {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+  }
+}
+
+.navList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  .navList {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+  }
+}
+
+.navLink {
+  font: var(--text-ui-navigation);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  border-bottom: 2px solid transparent;
+}
+
+/* Figma's "Active Indicator": accent color plus a 2px underline, so the
+   current page is never conveyed by color alone. */
+.navLinkActive {
+  color: var(--color-text-accent);
+  border-bottom-color: var(--color-bg-accent);
+}
+
+/* Visible in both the opened mobile menu and the desktop nav; the compact
+   "ES / EN" text in the collapsed summary bar is decorative only. */
+.localeGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font: var(--text-ui-navigation);
+}
+
+.localeLink {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 4px;
+}
+
+.localeLinkActive {
+  color: var(--color-text-primary);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.talkButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-full);
+  background: var(--color-action-primary);
+  border: 1px solid var(--color-border-accent);
+  color: var(--color-text-inverse);
+  font: var(--text-ui-label);
+  text-decoration: none;
+}

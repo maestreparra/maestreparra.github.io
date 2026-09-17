@@ -1,0 +1,18 @@
+.label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-full);
+  background: var(--color-bg-accent);
+  width: fit-content;
+}
+
+.text {
+  font: var(--text-evidence-mono);
+  letter-spacing: 0.6px;
+  color: var(--color-text-inverse);
+  margin: 0;
+  white-space: nowrap;
+}

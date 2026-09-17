@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://maestreparra.github.io/es/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://maestreparra.github.io/es/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://maestreparra.github.io/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maestreparra.github.io/es/" />
+  </url>
+  <url>
+    <loc>https://maestreparra.github.io/en/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://maestreparra.github.io/es/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://maestreparra.github.io/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maestreparra.github.io/es/" />
+  </url>
+  <url>
+    <loc>https://maestreparra.github.io/es/sobre-mi/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://maestreparra.github.io/es/sobre-mi/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://maestreparra.github.io/en/about/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maestreparra.github.io/es/sobre-mi/" />
+  </url>
+  <url>
+    <loc>https://maestreparra.github.io/en/about/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://maestreparra.github.io/es/sobre-mi/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://maestreparra.github.io/en/about/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maestreparra.github.io/es/sobre-mi/" />
+  </url>
+  <url>
+    <loc>https://maestreparra.github.io/es/proyectos/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://maestreparra.github.io/es/proyectos/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://maestreparra.github.io/en/work/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maestreparra.github.io/es/proyectos/" />
+  </url>
+  <url>
+    <loc>https://maestreparra.github.io/en/work/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://maestreparra.github.io/es/proyectos/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://maestreparra.github.io/en/work/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maestreparra.github.io/es/proyectos/" />
+  </url>
+  <url>
+    <loc>https://maestreparra.github.io/es/contacto/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://maestreparra.github.io/es/contacto/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://maestreparra.github.io/en/contact/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maestreparra.github.io/es/contacto/" />
+  </url>
+  <url>
+    <loc>https://maestreparra.github.io/en/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://maestreparra.github.io/es/contacto/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://maestreparra.github.io/en/contact/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maestreparra.github.io/es/contacto/" />
+  </url>
+</urlset>

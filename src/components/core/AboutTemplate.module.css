@@ -1,0 +1,112 @@
+.section {
+  width: 100%;
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 64px 80px;
+  }
+}
+
+.inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 1024px) {
+  .inner {
+    max-width: 1200px;
+    gap: var(--spacing-lg);
+  }
+}
+
+.heading {
+  font: var(--text-heading-h3);
+  letter-spacing: -0.4px;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+@media (min-width: 1024px) {
+  .heading {
+    font: var(--text-heading-h2);
+    letter-spacing: -1px;
+  }
+}
+
+.body {
+  font: var(--text-body-medium);
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .body {
+    font: var(--text-body-large);
+    max-width: 960px;
+  }
+}
+
+.capabilityGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 1024px) {
+  .capabilityGrid {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.experienceGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 1024px) {
+  .experienceGrid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--spacing-lg);
+  }
+}
+
+.principle {
+  background: var(--color-bg-inverse);
+  color: var(--color-text-inverse);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .principle {
+    max-width: 1200px;
+    padding: 56px;
+  }
+}
+
+.principle .heading,
+.principle .body {
+  color: var(--color-text-inverse);
+}

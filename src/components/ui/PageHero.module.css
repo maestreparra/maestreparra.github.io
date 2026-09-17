@@ -1,0 +1,82 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  align-items: flex-start;
+  width: 100%;
+  padding: var(--spacing-lg);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    gap: var(--spacing-lg);
+    padding: var(--spacing-xl);
+    max-width: 1200px;
+  }
+}
+
+.eyebrow {
+  font: var(--text-evidence-mono);
+  letter-spacing: 0.2px;
+  color: var(--color-text-accent);
+  margin: 0;
+}
+
+.title {
+  font: 700 40px/48px var(--font-display);
+  letter-spacing: -1px;
+  color: var(--color-text-primary);
+  margin: 0;
+  max-width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .title {
+    font: 700 56px/64px var(--font-display);
+    letter-spacing: -1.5px;
+    max-width: 1072px;
+  }
+}
+
+.introduction {
+  font: var(--text-body-medium);
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .introduction {
+    font: var(--text-body-large);
+    max-width: 1072px;
+  }
+}
+
+/*
+ * P7-QA-01: Figma reserves a fixed 300px title / 460px introduction area
+ * on Contact's mobile Page Hero (23:8, 23:15) as deliberate editorial
+ * whitespace for its short copy. Measured against About (23:4) and Work
+ * (23:6): both already meet or exceed these minimums with their longer
+ * copy, so applying the reservation unconditionally is safe for them in
+ * principle — but Work's *combined* page height overshot Figma by +11.5%
+ * when tried, while it was already within -1.4% without it. The reserved
+ * whitespace is therefore Contact-specific, opted into via `reserveHeight`,
+ * not a universal PageHero default.
+ */
+.titleReserveHeight {
+  min-height: 300px;
+}
+
+.introductionReserveHeight {
+  min-height: 460px;
+}
+
+@media (min-width: 1024px) {
+  .titleReserveHeight,
+  .introductionReserveHeight {
+    min-height: 0;
+  }
+}
