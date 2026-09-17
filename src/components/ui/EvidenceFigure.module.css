@@ -1,0 +1,134 @@
+.figureRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .figureRow {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin: 0;
+  width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .figure {
+    flex: 1 1 65%;
+  }
+}
+
+/*
+ * Local, self-contained breakpoint toggles (768px, matching the global
+ * .u-mobile-only / .u-desktop-only utility) instead of reusing that global
+ * utility directly on these elements: the utility only sets `display`, and
+ * `.imageBox`/`.notes` below also need to set `display` themselves (relative
+ * positioning for next/image's `fill`, and flex layout for the notes card).
+ * Combining both on one element makes the winner depend on CSS import
+ * order across stylesheets, which is fragile — these local classes avoid
+ * that entirely.
+ */
+.mobileOnly {
+  display: block;
+}
+
+.desktopOnly {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .mobileOnly {
+    display: none;
+  }
+
+  .desktopOnly {
+    display: block;
+  }
+}
+
+.imageBox {
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-canvas);
+  overflow: hidden;
+}
+
+.image {
+  object-fit: contain;
+}
+
+.caption {
+  font: var(--text-body-small);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.notesWrapMobile,
+.notesWrapDesktop {
+  width: 100%;
+}
+
+.notesWrapMobile {
+  display: block;
+}
+
+.notesWrapDesktop {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .notesWrapMobile {
+    display: none;
+  }
+
+  .notesWrapDesktop {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .notesWrapMobile,
+  .notesWrapDesktop {
+    flex: 1 1 35%;
+    width: auto;
+  }
+}
+
+.notes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  align-items: flex-start;
+  width: 100%;
+  padding: var(--spacing-lg);
+  background: var(--color-bg-inverse);
+  color: var(--color-text-inverse);
+  border-radius: var(--radius-lg);
+}
+
+.noteTitle {
+  font: var(--text-heading-h4);
+  margin: 0;
+}
+
+.noteBody {
+  font: var(--text-body-medium);
+  margin: 0;
+}
+
+.provenance {
+  font: var(--text-evidence-mono);
+  letter-spacing: 0.6px;
+  margin: 0;
+}

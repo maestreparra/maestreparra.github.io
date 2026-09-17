@@ -46,6 +46,10 @@ export function WorkIndexTemplate({ locale }: WorkIndexTemplateProps) {
               {c.projects.map((project) => {
                 const title = localize(project.title, locale);
                 const summary = localize(project.summary, locale);
+                const internal = Boolean(project.caseStudyRouteKey);
+                const href = project.caseStudyRouteKey
+                  ? getRoutePath(project.caseStudyRouteKey, locale)
+                  : project.repositoryUrl;
                 return (
                   <ProjectCard
                     key={project.id}
@@ -55,7 +59,8 @@ export function WorkIndexTemplate({ locale }: WorkIndexTemplateProps) {
                     summary={{ desktop: summary, mobile: summary }}
                     scope={localize(project.scope, locale)}
                     action={localize(project.action, locale)}
-                    href={project.repositoryUrl}
+                    href={href}
+                    internal={internal}
                   />
                 );
               })}

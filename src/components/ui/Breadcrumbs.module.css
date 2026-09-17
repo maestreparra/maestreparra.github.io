@@ -1,0 +1,30 @@
+.breadcrumb {
+  width: 100%;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  font: var(--text-evidence-mono);
+  letter-spacing: 0.6px;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+}
+
+.link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.current {
+  color: var(--color-text-secondary);
+}

@@ -129,6 +129,12 @@ export interface WorkProjectContent {
   scope: LocalizedValue;
   action: LocalizedValue;
   repositoryUrl: string;
+  /**
+   * When set, the card's primary action routes internally to this case
+   * study instead of the external repository (P9-QA: Work-card migration,
+   * only once all four case-study routes exist).
+   */
+  caseStudyRouteKey?: "vitalink" | "bm-envios";
 }
 
 export interface WorkContent {
@@ -179,6 +185,7 @@ export const workContent: WorkContent = {
       scope: { es: "ESTRATEGIA · MARCA · UX/UI · ANGULAR", en: "PRODUCT STRATEGY · BRANDING · UX/UI · ANGULAR · I18N" },
       action: { es: "Ver caso →", en: "Read case →" },
       repositoryUrl: "https://github.com/maestreparra/vitalink-digital-ecosystem",
+      caseStudyRouteKey: "vitalink",
     },
     {
       id: "bm-envios",
@@ -192,6 +199,7 @@ export const workContent: WorkContent = {
       scope: { es: "RESEARCH · IA · UX/UI · NEXT.JS", en: "RESEARCH · INFORMATION ARCHITECTURE · UX/UI · NEXT.JS · I18N" },
       action: { es: "Ver proyecto →", en: "View project →" },
       repositoryUrl: "https://github.com/maestreparra/bm-envios-digital-platform",
+      caseStudyRouteKey: "bm-envios",
     },
   ],
   legendHeading: { es: "Cómo leer el estado", en: "How to read the status" },

@@ -16,6 +16,8 @@ Spanish is the default language. English is available through explicit localized
 | `/es/sobre-mi/` | `/en/about/` |
 | `/es/proyectos/` | `/en/work/` |
 | `/es/contacto/` | `/en/contact/` |
+| `/es/proyectos/vitalink-digital-ecosystem/` | `/en/work/vitalink-digital-ecosystem/` |
+| `/es/proyectos/bm-envios-digital-experience/` | `/en/work/bm-envios-digital-experience/` |
 
 ## Product and engineering approach
 
@@ -53,5 +55,4 @@ corepack pnpm build
 CI=1 corepack pnpm test:e2e
 ```
 
-The public project links currently point to approved external repository evidence while the full internal case-study pages continue through their own design and QA gates.
-
+VitaLink and BM Envíos include bilingual internal case studies with explicit links to their approved public repository evidence. BM Envíos remains transparently identified as being in final refinement.

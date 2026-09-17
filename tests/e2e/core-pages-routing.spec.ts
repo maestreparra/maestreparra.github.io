@@ -113,22 +113,35 @@ test.describe("P7 — mobile disclosure has no duplicate visible/focusable navig
   });
 });
 
-test.describe("P7 — project actions remain external until case routes exist", () => {
-  test("Work page project actions link to the approved public repositories", async ({ page }) => {
+test.describe("P9-QA — Work-card actions migrated to the internal case-study routes", () => {
+  test("Work page project actions now link to the internal case-study routes, not the external repositories", async ({
+    page,
+  }) => {
     await page.goto("/es/proyectos/");
     const vitalinkLink = page.getByRole("link", { name: /Ver caso →/ });
-    await expect(vitalinkLink).toHaveAttribute("href", "https://github.com/maestreparra/vitalink-digital-ecosystem");
-    await expect(vitalinkLink).toHaveAttribute("target", "_blank");
+    await expect(vitalinkLink).toHaveAttribute("href", "/es/proyectos/vitalink-digital-ecosystem/");
+    await expect(vitalinkLink).not.toHaveAttribute("target", "_blank");
     const bmLink = page.getByRole("link", { name: /Ver proyecto →/ });
-    await expect(bmLink).toHaveAttribute("href", "https://github.com/maestreparra/bm-envios-digital-platform");
+    await expect(bmLink).toHaveAttribute("href", "/es/proyectos/bm-envios-digital-experience/");
+    await expect(bmLink).not.toHaveAttribute("target", "_blank");
   });
 
-  test("no link on the Work page targets a deferred internal case-study path", async ({ page }) => {
+  test("the English Work page migrates both cards to the English case-study routes", async ({ page }) => {
     await page.goto("/en/work/");
-    const hrefs = await page.locator("a[href]").evaluateAll((links) => links.map((l) => l.getAttribute("href")));
-    for (const href of hrefs) {
-      expect(href).not.toMatch(/\/(work|proyectos)\/(vitalink|bm-envios)/);
-    }
+    const vitalinkLink = page.getByRole("link", { name: /Read case →/ });
+    await expect(vitalinkLink).toHaveAttribute("href", "/en/work/vitalink-digital-ecosystem/");
+    const bmLink = page.getByRole("link", { name: /View project →/ });
+    await expect(bmLink).toHaveAttribute("href", "/en/work/bm-envios-digital-experience/");
+  });
+
+  test("each case study still links out to its approved public repository as an explicit external action", async ({
+    page,
+  }) => {
+    await page.goto("/es/proyectos/vitalink-digital-ecosystem/");
+    const repoLink = page.getByRole("link", { name: "Revisar GitHub" });
+    await expect(repoLink).toHaveAttribute("href", "https://github.com/maestreparra/vitalink-digital-ecosystem");
+    await expect(repoLink).toHaveAttribute("target", "_blank");
+    await expect(repoLink).toHaveAttribute("rel", "noreferrer noopener");
   });
 });
 
@@ -141,9 +154,16 @@ test.describe("P7 — bilingual 404 includes valid Work recovery links", () => {
   });
 });
 
-test.describe("P7 — static output English-lang postbuild invariant", () => {
-  test("out/en/{index,about,work,contact}/*.html all expose lang=\"en\" and never lang=\"es\"", () => {
-    for (const relativePath of ["index.html", "about/index.html", "work/index.html", "contact/index.html"]) {
+test.describe("P7/P9 — static output English-lang postbuild invariant", () => {
+  test("out/en/ six-route English inventory all expose lang=\"en\" and never lang=\"es\" (P9-QA)", () => {
+    for (const relativePath of [
+      "index.html",
+      "about/index.html",
+      "work/index.html",
+      "contact/index.html",
+      "work/vitalink-digital-ecosystem/index.html",
+      "work/bm-envios-digital-experience/index.html",
+    ]) {
       const html = readFileSync(path.resolve(process.cwd(), "out/en", relativePath), "utf8");
       expect(html, relativePath).toMatch(/<html lang="en"/);
       expect(html, relativePath).not.toMatch(/<html lang="es"/);

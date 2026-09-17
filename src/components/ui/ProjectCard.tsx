@@ -9,6 +9,13 @@ export interface ProjectCardProps {
   scope: string;
   action: string;
   href: string;
+  /**
+   * True for an internal case-study route: navigates in place with no
+   * target/rel. False (the default) for an external repository link, which
+   * opens safely in a new tab. Explicit rather than inferred from the URL
+   * shape, per the P9 contract's Work-card migration boundary.
+   */
+  internal?: boolean;
 }
 
 function ResponsivePlain({ desktop, mobile }: { desktop: string; mobile: string }) {
@@ -23,7 +30,7 @@ function ResponsivePlain({ desktop, mobile }: { desktop: string; mobile: string 
   );
 }
 
-export function ProjectCard({ publicationStatus, status, title, summary, scope, action, href }: ProjectCardProps) {
+export function ProjectCard({ publicationStatus, status, title, summary, scope, action, href, internal = false }: ProjectCardProps) {
   const isFinalRefinement = publicationStatus === "final-refinement";
 
   return (
@@ -37,7 +44,13 @@ export function ProjectCard({ publicationStatus, status, title, summary, scope, 
         <ResponsivePlain desktop={summary.desktop} mobile={summary.mobile} />
       </p>
       <p className={styles.scope}>{scope}</p>
-      <a className={styles.action} href={href} target="_blank" rel="noreferrer noopener" aria-label={`${title.desktop} — ${action}`}>
+      <a
+        className={styles.action}
+        href={href}
+        target={internal ? undefined : "_blank"}
+        rel={internal ? undefined : "noreferrer noopener"}
+        aria-label={`${title.desktop} — ${action}`}
+      >
         {action}
       </a>
     </li>

@@ -49,6 +49,26 @@ const routeMetadataCopy: Record<PublicRouteKey, { title: Record<Locale, string>;
       en: "Contact Giomar Maestre for remote Product Design and UX Engineering opportunities.",
     },
   },
+  vitalink: {
+    title: {
+      es: "VitaLink Digital Ecosystem — Caso de estudio",
+      en: "VitaLink Digital Ecosystem — Case study",
+    },
+    description: {
+      es: "Estrategia, identidad, UX/UI, Design System y arquitectura Angular para un ecosistema logístico bilingüe.",
+      en: "Strategy, identity, UX/UI, design-system work, and Angular architecture for a bilingual logistics ecosystem.",
+    },
+  },
+  "bm-envios": {
+    title: {
+      es: "BM Envíos Digital Experience — Caso de estudio",
+      en: "BM Envios Digital Experience — Case study",
+    },
+    description: {
+      es: "Research, UX/UI, localización y Next.js para una plataforma logística bilingüe con formularios demostrativos privados por diseño.",
+      en: "Research, UX/UI, localization, and Next.js delivery for a bilingual logistics platform with privacy-safe demonstration forms.",
+    },
+  },
 };
 
 /**
@@ -76,7 +96,7 @@ export function buildRouteMetadata(routeKey: PublicRouteKey, locale: Locale): Me
       description: description[locale],
       url,
       locale: locale === "es" ? "es_ES" : "en_US",
-      type: routeKey === "about" ? "profile" : "website",
+      type: routeKey === "about" ? "profile" : routeKey === "vitalink" || routeKey === "bm-envios" ? "article" : "website",
     },
   };
 }

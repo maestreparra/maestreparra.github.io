@@ -11,13 +11,13 @@ export function getAbsoluteUrl(path: string): string {
  * owns its localized paths and template so navigation, locale switching,
  * and metadata all reference one source instead of ad-hoc strings.
  */
-export type PublicRouteKey = "home" | "about" | "work" | "contact";
+export type PublicRouteKey = "home" | "about" | "work" | "contact" | "vitalink" | "bm-envios";
 
 export interface PublicRouteEntry {
   key: PublicRouteKey;
   paths: Record<Locale, string>;
   indexable: true;
-  template: "home" | "editorial-profile" | "project-index" | "contact-links";
+  template: "home" | "editorial-profile" | "project-index" | "contact-links" | "case-study";
 }
 
 export const publicRoutes: Record<PublicRouteKey, PublicRouteEntry> = {
@@ -45,9 +45,33 @@ export const publicRoutes: Record<PublicRouteKey, PublicRouteEntry> = {
     indexable: true,
     template: "contact-links",
   },
+  vitalink: {
+    key: "vitalink",
+    paths: { es: "/es/proyectos/vitalink-digital-ecosystem/", en: "/en/work/vitalink-digital-ecosystem/" },
+    indexable: true,
+    template: "case-study",
+  },
+  "bm-envios": {
+    key: "bm-envios",
+    paths: { es: "/es/proyectos/bm-envios-digital-experience/", en: "/en/work/bm-envios-digital-experience/" },
+    indexable: true,
+    template: "case-study",
+  },
 };
 
 export const publicRouteKeys = Object.keys(publicRoutes) as PublicRouteKey[];
+
+/**
+ * The primary-navigation subset of publicRoutes (Architecture Amendment 1).
+ * Contact renders separately as its own CTA, and the two Case Study routes
+ * are reachable from Work cards and case-study internal links, not from the
+ * global Header — this keeps that navigation-only distinction typed instead
+ * of relying on `Exclude<PublicRouteKey, "contact">`, which silently drifts
+ * every time a new non-navigation public route is added to the registry.
+ */
+export const primaryNavigationRouteKeys = ["home", "work", "about"] as const satisfies readonly PublicRouteKey[];
+
+export type PrimaryNavigationRouteKey = (typeof primaryNavigationRouteKeys)[number];
 
 export function getRoutePath(routeKey: PublicRouteKey, locale: Locale): string {
   return publicRoutes[routeKey].paths[locale];

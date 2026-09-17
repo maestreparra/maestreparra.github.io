@@ -6,8 +6,10 @@ import {
   getHomePath,
   getRoutePath,
   homeAnchors,
+  primaryNavigationRouteKeys,
   publicRouteKeys,
   publicRoutes,
+  type PublicRouteKey,
 } from "@/i18n/routes";
 
 describe("route and locale parity — single publicRoutes registry (P7-QA-04)", () => {
@@ -53,5 +55,36 @@ describe("route-aware locale switch target (buildRouteSwitchHref)", () => {
     expect(buildRouteSwitchHref("about", "en", "", "")).toBe("/en/about/");
     expect(buildRouteSwitchHref("work", "es", "", "")).toBe("/es/proyectos/");
     expect(buildRouteSwitchHref("contact", "en", "?ref=cv", "#links")).toBe("/en/contact/?ref=cv#links");
+  });
+
+  it("switches both Case Study routes, preserving query and fragment (P9-QA)", () => {
+    expect(buildRouteSwitchHref("vitalink", "en", "", "")).toBe("/en/work/vitalink-digital-ecosystem/");
+    expect(buildRouteSwitchHref("vitalink", "es", "?ref=cv", "#evidence")).toBe(
+      "/es/proyectos/vitalink-digital-ecosystem/?ref=cv#evidence",
+    );
+    expect(buildRouteSwitchHref("bm-envios", "en", "", "")).toBe("/en/work/bm-envios-digital-experience/");
+    expect(buildRouteSwitchHref("bm-envios", "es", "?ref=cv", "#evidence")).toBe(
+      "/es/proyectos/bm-envios-digital-experience/?ref=cv#evidence",
+    );
+  });
+});
+
+describe("P9 Architecture Amendment 1 — primary-navigation subset stays typed and separate from detail routes", () => {
+  it("publicRoutes/PublicRouteKey contain exactly the six approved P9 route keys", () => {
+    const expectedKeys: PublicRouteKey[] = ["home", "about", "work", "contact", "vitalink", "bm-envios"];
+    expect([...publicRouteKeys].sort()).toEqual([...expectedKeys].sort());
+    for (const key of expectedKeys) {
+      expect(publicRoutes[key]).toBeDefined();
+    }
+  });
+
+  it("primaryNavigationRouteKeys contains exactly home, work, and about, in that order", () => {
+    expect(primaryNavigationRouteKeys).toEqual(["home", "work", "about"]);
+  });
+
+  it("the Case Study routes are not part of the primary-navigation subset", () => {
+    expect(primaryNavigationRouteKeys).not.toContain("vitalink");
+    expect(primaryNavigationRouteKeys).not.toContain("bm-envios");
+    expect(primaryNavigationRouteKeys).not.toContain("contact");
   });
 });

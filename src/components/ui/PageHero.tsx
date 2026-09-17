@@ -14,9 +14,30 @@ export interface PageHeroProps {
    * rather than a PageHero-wide default. See PageHero.module.css.
    */
   reserveMobileHeight?: boolean;
+  /**
+   * Optional condensed mobile variants (P9 Correction Attempt 2, QA-01).
+   * When omitted, every P7 caller (About/Work/Contact) renders byte-equivalent
+   * output to before this change: a single text node per field. When
+   * supplied, the field renders two text spans toggled by the existing
+   * `.u-mobile-only` / `.u-desktop-only` breakpoint utility instead, so the
+   * page keeps exactly one semantic `<h1>`/`<p>` while swapping only the
+   * visible copy per breakpoint.
+   */
+  eyebrowMobile?: string;
+  titleMobile?: string;
+  introductionMobile?: string;
 }
 
-export function PageHero({ eyebrow, title, introduction, headingId, reserveMobileHeight = false }: PageHeroProps) {
+export function PageHero({
+  eyebrow,
+  title,
+  introduction,
+  headingId,
+  reserveMobileHeight = false,
+  eyebrowMobile,
+  titleMobile,
+  introductionMobile,
+}: PageHeroProps) {
   const titleClassName = reserveMobileHeight ? `${styles.title} ${styles.titleReserveHeight}` : styles.title;
   const introductionClassName = reserveMobileHeight
     ? `${styles.introduction} ${styles.introductionReserveHeight}`
@@ -24,11 +45,36 @@ export function PageHero({ eyebrow, title, introduction, headingId, reserveMobil
 
   return (
     <div className={styles.hero}>
-      <p className={styles.eyebrow}>{eyebrow}</p>
+      <p className={styles.eyebrow}>
+        {eyebrowMobile !== undefined ? (
+          <>
+            <span className="u-mobile-only">{eyebrowMobile}</span>
+            <span className="u-desktop-only">{eyebrow}</span>
+          </>
+        ) : (
+          eyebrow
+        )}
+      </p>
       <h1 id={headingId} className={titleClassName}>
-        {title}
+        {titleMobile !== undefined ? (
+          <>
+            <span className="u-mobile-only">{titleMobile}</span>
+            <span className="u-desktop-only">{title}</span>
+          </>
+        ) : (
+          title
+        )}
       </h1>
-      <p className={introductionClassName}>{introduction}</p>
+      <p className={introductionClassName}>
+        {introductionMobile !== undefined ? (
+          <>
+            <span className="u-mobile-only">{introductionMobile}</span>
+            <span className="u-desktop-only">{introduction}</span>
+          </>
+        ) : (
+          introduction
+        )}
+      </p>
     </div>
   );
 }

@@ -6,9 +6,9 @@ import { publicRoutes, publicRouteKeys, getRoutePath, buildRouteSwitchHref } fro
 import { aboutContent, workContent, contactContent } from "@/content/core-pages";
 import { buildAboutStructuredData } from "@/lib/structured-data";
 
-describe("P7 — typed PublicRouteKey parity and exact paths", () => {
-  it("defines exactly home, about, work, and contact", () => {
-    expect(publicRouteKeys.sort()).toEqual(["about", "contact", "home", "work"]);
+describe("P7/P9 — typed PublicRouteKey parity and exact paths", () => {
+  it("defines exactly home, about, work, contact, vitalink, and bm-envios (P9-QA)", () => {
+    expect(publicRouteKeys.sort()).toEqual(["about", "bm-envios", "contact", "home", "vitalink", "work"]);
   });
 
   it("has a path for every locale on every route", () => {
@@ -188,10 +188,10 @@ describe("P7 — About-only structured data", () => {
   });
 });
 
-describe("P7 — sitemap inventory", () => {
+describe("P7/P9 — sitemap inventory", () => {
   const sitemap = readFileSync(path.resolve(process.cwd(), "public/sitemap.xml"), "utf8");
 
-  it("contains exactly the eight localized Home/Core Pages URLs", () => {
+  it("contains exactly the twelve localized Home/Core Pages/Case Study URLs (P9-QA)", () => {
     const locs = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
     expect(locs.sort()).toEqual(
       [
@@ -203,14 +203,16 @@ describe("P7 — sitemap inventory", () => {
         "https://maestreparra.github.io/en/work/",
         "https://maestreparra.github.io/es/contacto/",
         "https://maestreparra.github.io/en/contact/",
+        "https://maestreparra.github.io/es/proyectos/vitalink-digital-ecosystem/",
+        "https://maestreparra.github.io/en/work/vitalink-digital-ecosystem/",
+        "https://maestreparra.github.io/es/proyectos/bm-envios-digital-experience/",
+        "https://maestreparra.github.io/en/work/bm-envios-digital-experience/",
       ].sort(),
     );
   });
 
-  it("excludes the root resolver, 404, and any case-study route", () => {
+  it("excludes the root resolver and the 404 route", () => {
     expect(sitemap).not.toMatch(/<loc>https:\/\/maestreparra\.github\.io\/<\/loc>/);
     expect(sitemap).not.toContain("404");
-    expect(sitemap).not.toContain("vitalink");
-    expect(sitemap).not.toContain("bm-envios");
   });
 });

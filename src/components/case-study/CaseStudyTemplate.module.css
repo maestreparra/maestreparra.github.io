@@ -1,0 +1,209 @@
+.section {
+  width: 100%;
+  /* Frozen mobile Case Study frames use 32px vertical section padding
+     (Case Intro, Process, Evidence, Technical Evidence, Outcome), not the
+     generic --spacing-2xl (48px) used elsewhere in Core Pages (P9-QA-01). */
+  padding: 32px var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 64px 80px;
+  }
+}
+
+/* Challenge and Responsibility is the one section that uses a tighter 24px
+   vertical padding on mobile (46:135/46:219 "Challenge and Responsibility"
+   frame), reverting to the same desktop padding as every other section. */
+.sectionTight {
+  composes: section;
+  padding: var(--spacing-lg) var(--spacing-lg);
+}
+
+@media (min-width: 1024px) {
+  .sectionTight {
+    padding: 64px 80px;
+  }
+}
+
+.inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 1024px) {
+  .inner {
+    max-width: 1200px;
+    gap: var(--spacing-lg);
+  }
+}
+
+.sectionLabel {
+  font: var(--text-evidence-mono);
+  letter-spacing: 0.6px;
+  color: var(--color-text-accent);
+  margin: 0;
+}
+
+.sectionLabelInverse {
+  font: var(--text-evidence-mono);
+  letter-spacing: 0.6px;
+  /* Accent-on-dark: #c51d34 on #171717 measures 3.07:1, failing WCAG AA.
+     Uses the same accessible accent-on-inverse token already established
+     for this exact case in tokens.css (see its comment for the P4 QA note). */
+  color: var(--color-text-accent-on-inverse);
+  margin: 0;
+}
+
+.heading {
+  font: var(--text-heading-h3);
+  letter-spacing: -0.4px;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+@media (min-width: 1024px) {
+  .heading {
+    font: var(--text-heading-h2);
+    letter-spacing: -1px;
+  }
+}
+
+.body {
+  font: var(--text-body-medium);
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .body {
+    font: var(--text-body-large);
+    max-width: 960px;
+  }
+}
+
+.snapshot {
+  width: 100%;
+  padding: var(--spacing-lg);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+@media (min-width: 1024px) {
+  .snapshot {
+    padding: var(--spacing-xl);
+  }
+}
+
+.snapshotLabel {
+  font: var(--text-evidence-mono);
+  letter-spacing: 0.6px;
+  color: var(--color-text-accent);
+  margin: 0;
+}
+
+.role {
+  font: var(--text-heading-h4);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.scope {
+  font: var(--text-body-large);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.contextCards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .contextCards {
+    flex-direction: row;
+  }
+}
+
+.contextCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  align-items: flex-start;
+  width: 100%;
+  padding: var(--spacing-xl);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+}
+
+.contextCardEmphasis {
+  background: var(--color-bg-inverse);
+  border-color: var(--color-bg-inverse);
+  color: var(--color-text-inverse);
+}
+
+.cardTitle {
+  font: var(--text-heading-h3);
+  letter-spacing: -0.4px;
+  margin: 0;
+  color: inherit;
+}
+
+.cardBody {
+  font: var(--text-body-medium);
+  margin: 0;
+  color: inherit;
+  opacity: 0.9;
+}
+
+.contextCard:not(.contextCardEmphasis) .cardTitle,
+.contextCard:not(.contextCardEmphasis) .cardBody {
+  color: var(--color-text-secondary);
+}
+
+.contextCard:not(.contextCardEmphasis) .cardTitle {
+  color: var(--color-text-primary);
+}
+
+.outcome {
+  width: 100%;
+  padding: var(--spacing-xl);
+  background: var(--color-bg-inverse);
+  color: var(--color-text-inverse);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  align-items: flex-start;
+}
+
+.outcomeTitle {
+  font: var(--text-heading-h3);
+  letter-spacing: -0.4px;
+  margin: 0;
+}
+
+@media (min-width: 1024px) {
+  .outcomeTitle {
+    font: var(--text-heading-h2);
+    letter-spacing: -1px;
+  }
+}
+
+.outcomeBody {
+  font: var(--text-body-medium);
+  margin: 0;
+}

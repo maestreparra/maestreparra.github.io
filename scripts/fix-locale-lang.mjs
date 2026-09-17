@@ -4,8 +4,8 @@
 // without introducing a second, nested root layout (see the note in
 // src/app/layout.tsx).
 //
-// Hardened invariant (P4-QA-09, extended for P7): this script FAILS the
-// build (non-zero exit) if out/en/ is missing, or if the set of patched
+// Hardened invariant (P4-QA-09, extended for P7 and P9): this script FAILS
+// the build (non-zero exit) if out/en/ is missing, or if the set of patched
 // files does not exactly match the expected English route inventory —
 // silently warning and succeeding on a missing/partial/duplicated patch
 // would let an unlocalized <html lang="es"> ship under /en/ undetected.
@@ -14,13 +14,16 @@ import path from "node:path";
 
 const outDir = path.resolve(process.cwd(), "out", "en");
 
-// Exactly the English route pages expected after P7: Home plus the three
-// English Core Pages (About, Work, Contact).
+// Exactly the English route pages expected after P9: Home, the three
+// English Core Pages (About, Work, Contact), and the two English case
+// studies (VitaLink, BM Envios).
 const EXPECTED_RELATIVE_PATHS = [
   "index.html",
   "about/index.html",
   "work/index.html",
   "contact/index.html",
+  "work/vitalink-digital-ecosystem/index.html",
+  "work/bm-envios-digital-experience/index.html",
 ].sort();
 
 async function walk(dir) {

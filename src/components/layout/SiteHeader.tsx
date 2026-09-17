@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import type { Locale } from "@/i18n/locales";
-import { getRoutePath, type PublicRouteKey } from "@/i18n/routes";
+import { getRoutePath, primaryNavigationRouteKeys, type PrimaryNavigationRouteKey, type PublicRouteKey } from "@/i18n/routes";
 import { homeContent, localize } from "@/content/home";
 import { LocaleSwitchLink } from "./LocaleSwitchLink";
 import styles from "./SiteHeader.module.css";
@@ -11,12 +11,10 @@ export interface SiteHeaderProps {
   currentRouteKey: PublicRouteKey;
 }
 
-const NAV_ROUTE_KEYS: Array<Exclude<PublicRouteKey, "contact">> = ["home", "work", "about"];
-
 function NavItems({ locale, currentRouteKey }: { locale: Locale; currentRouteKey: PublicRouteKey }) {
   const { nav } = homeContent;
   const isEs = locale === "es";
-  const navLabels: Record<Exclude<PublicRouteKey, "contact">, typeof nav.home> = {
+  const navLabels: Record<PrimaryNavigationRouteKey, typeof nav.home> = {
     home: nav.home,
     work: nav.work,
     about: nav.about,
@@ -25,7 +23,7 @@ function NavItems({ locale, currentRouteKey }: { locale: Locale; currentRouteKey
   return (
     <>
       <ul className={styles.navList}>
-        {NAV_ROUTE_KEYS.map((routeKey) => {
+        {primaryNavigationRouteKeys.map((routeKey) => {
           const isActive = routeKey === currentRouteKey;
           return (
             <li key={routeKey}>
