@@ -103,15 +103,15 @@ test.describe("P7-QA-01 — Contact mobile matches the frozen Figma composition 
     expect(Math.abs(aboutHeight - 4698), "About ES 390px vs Figma 23:4 (4698px)").toBeLessThanOrEqual(200);
   });
 
-  test("Contact ES/EN full-page height at 390px is within tolerance of Figma nodes 23:8 and 23:15", async ({ page }) => {
+  test("P11 Contact ES/EN full-page height includes the approved fourth contact card without layout drift", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 900 });
     await page.goto("/es/contacto/");
     const es = await page.evaluate(() => document.documentElement.scrollHeight);
-    expect(Math.abs(es - 2182), "Contact ES 390px vs Figma 23:8 (2182px)").toBeLessThanOrEqual(80);
+    expect(Math.abs(es - 2369), "Contact ES 390px P11 composition (2369px)").toBeLessThanOrEqual(40);
 
     await page.goto("/en/contact/");
     const en = await page.evaluate(() => document.documentElement.scrollHeight);
-    expect(Math.abs(en - 2156), "Contact EN 390px vs Figma 23:15 (2156px)").toBeLessThanOrEqual(80);
+    expect(Math.abs(en - 2369), "Contact EN 390px P11 composition (2369px)").toBeLessThanOrEqual(40);
   });
 
   test("no clipping or overflow at 360px with the reserved whitespace active", async ({ page }) => {

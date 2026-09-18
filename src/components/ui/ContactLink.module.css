@@ -13,12 +13,6 @@
   color: inherit;
 }
 
-@media (min-width: 1024px) {
-  .link {
-    width: 360px;
-  }
-}
-
 .copy {
   display: flex;
   flex-direction: column;

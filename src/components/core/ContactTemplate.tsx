@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContactLink } from "@/components/ui/ContactLink";
+import { DirectContactDialog } from "@/components/ui/DirectContactDialog";
 import styles from "./ContactTemplate.module.css";
 
 export interface ContactTemplateProps {
@@ -49,6 +50,7 @@ export function ContactTemplate({ locale }: ContactTemplateProps) {
                   href={link.href}
                 />
               ))}
+              <DirectContactDialog locale={locale} content={c.directContact} />
             </div>
           </div>
         </section>

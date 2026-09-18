@@ -104,7 +104,7 @@ describe("P7 — Work status labels and case inventory", () => {
   });
 });
 
-describe("P7 — Contact's exact link inventory and absence of email/telephone/form", () => {
+describe("P11 — Contact's professional links and direct-contact contract", () => {
   it("has exactly LinkedIn, GitHub, and Behance, in that order", () => {
     expect(contactContent.links.map((link) => link.id)).toEqual(["linkedin", "github", "behance"]);
   });
@@ -115,14 +115,19 @@ describe("P7 — Contact's exact link inventory and absence of email/telephone/f
     expect(contactContent.links.find((l) => l.id === "behance")?.href).toBe("https://www.behance.net/giomarmaestre/");
   });
 
-  it("never renders an email address or telephone number", () => {
-    // The privacy statement legitimately says "does not use forms" in
-    // prose — that assertion belongs at the rendered-DOM level (checked by
-    // the e2e privacy suite: no <form>/<input> elements), not as a banned
-    // word here.
+  it("uses the approved phone number and exactly two privacy-preserving contact protocols", () => {
+    expect(contactContent.directContact.phoneDisplay).toBe("+58 422 144 5743");
+    expect(contactContent.directContact.actions).toEqual([
+      expect.objectContaining({ id: "whatsapp", href: "https://wa.me/584221445743" }),
+      expect.objectContaining({ id: "messages", href: "sms:+584221445743" }),
+    ]);
+    expect(JSON.stringify(contactContent.directContact)).not.toContain("tel:");
+  });
+
+  it("contains no email address, form endpoint, prefilled message, or tracking parameter", () => {
     const allText = JSON.stringify(contactContent);
     expect(allText).not.toMatch(/@[a-z0-9.-]+\.[a-z]{2,}/i);
-    expect(allText).not.toMatch(/\+?\d[\d\s().-]{7,}\d/);
+    expect(allText).not.toMatch(/mailto:|api\/|webhook|utm_|[?&](?:text|body)=/i);
   });
 });
 

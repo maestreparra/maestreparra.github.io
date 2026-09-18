@@ -235,6 +235,25 @@ export interface ContactLinkContent {
   href: string;
 }
 
+export interface DirectContactActionContent {
+  id: "whatsapp" | "messages";
+  label: LocalizedValue;
+  detail: LocalizedValue;
+  href: string;
+  opensNewTab?: boolean;
+}
+
+export interface DirectContactContent {
+  cardLabel: LocalizedValue;
+  cardDetail: LocalizedValue;
+  dialogTitle: LocalizedValue;
+  dialogIntroduction: LocalizedValue;
+  phoneLabel: LocalizedValue;
+  phoneDisplay: string;
+  closeLabel: LocalizedValue;
+  actions: DirectContactActionContent[];
+}
+
 export interface ContactContent {
   eyebrow: LocalizedValue;
   title: LocalizedValue;
@@ -242,6 +261,7 @@ export interface ContactContent {
   linksHeading: LocalizedValue;
   linksBody: LocalizedValue;
   links: ContactLinkContent[];
+  directContact: DirectContactContent;
   privacyHeading: LocalizedValue;
   privacyBody: LocalizedValue;
 }
@@ -284,9 +304,51 @@ export const contactContent: ContactContent = {
       href: "https://www.behance.net/giomarmaestre/",
     },
   ],
+  directContact: {
+    cardLabel: { es: "Contacto directo", en: "Direct contact" },
+    cardDetail: {
+      es: "WhatsApp o Messages / SMS",
+      en: "WhatsApp or Messages / SMS",
+    },
+    dialogTitle: {
+      es: "Elige cómo quieres contactarme",
+      en: "Choose how you would like to contact me",
+    },
+    dialogIntroduction: {
+      es: "Tu dispositivo abrirá la aplicación correspondiente. Este sitio no recopila ni almacena los datos de la conversación.",
+      en: "Your device will open the corresponding application. This website does not collect or store conversation data.",
+    },
+    phoneLabel: { es: "Número de contacto", en: "Contact number" },
+    phoneDisplay: "+58 422 144 5743",
+    closeLabel: {
+      es: "Cerrar opciones de contacto",
+      en: "Close contact options",
+    },
+    actions: [
+      {
+        id: "whatsapp",
+        label: { es: "Escribir por WhatsApp", en: "Message me on WhatsApp" },
+        detail: {
+          es: "Abre WhatsApp o WhatsApp Web",
+          en: "Opens WhatsApp or WhatsApp Web",
+        },
+        href: "https://wa.me/584221445743",
+        opensNewTab: true,
+      },
+      {
+        id: "messages",
+        label: { es: "Abrir Messages / SMS", en: "Open Messages / SMS" },
+        detail: {
+          es: "En iPhone, Messages decide si usa iMessage o SMS. En Android, abre tu aplicación de mensajes.",
+          en: "On iPhone, Messages decides whether to use iMessage or SMS. On Android, it opens your messaging app.",
+        },
+        href: "sms:+584221445743",
+      },
+    ],
+  },
   privacyHeading: { es: "Privacidad por diseño", en: "Privacy by design" },
   privacyBody: {
-    es: "Este sitio no utiliza formularios, cookies de seguimiento ni almacenamiento de datos personales. Los enlaces abren perfiles profesionales externos y dejan el control de la conversación en tus manos.",
-    en: "This website does not use forms, tracking cookies, or personal-data storage. External links open professional profiles and leave you in control of the conversation.",
+    es: "Este sitio no utiliza formularios, cookies de seguimiento ni almacenamiento de datos personales. Las opciones de contacto solo abren la aplicación que selecciones; la conversación no pasa por este sitio.",
+    en: "This website does not use forms, tracking cookies, or personal-data storage. Contact options only open the application you select; the conversation does not pass through this website.",
   },
 };
