@@ -7,8 +7,10 @@ import { aboutContent, workContent, contactContent } from "@/content/core-pages"
 import { buildAboutStructuredData } from "@/lib/structured-data";
 
 describe("P7/P9 — typed PublicRouteKey parity and exact paths", () => {
-  it("defines exactly home, about, work, contact, vitalink, and bm-envios (P9-QA)", () => {
-    expect(publicRouteKeys.sort()).toEqual(["about", "bm-envios", "contact", "home", "vitalink", "work"]);
+  it("defines exactly home, about, work, contact, vitalink, bm-envios, licendi, meeco, pilotorb, and appliedxl", () => {
+    expect(publicRouteKeys.sort()).toEqual(
+      ["about", "appliedxl", "bm-envios", "contact", "home", "licendi", "meeco", "pilotorb", "vitalink", "work"].sort(),
+    );
   });
 
   it("has a path for every locale on every route", () => {
@@ -52,8 +54,8 @@ describe("P7 — route-aware locale switching preserves query and fragment", () 
 });
 
 describe("P7 — About capability and experience inventories", () => {
-  it("has exactly ten capabilities in both locales", () => {
-    expect(aboutContent.capabilities).toHaveLength(10);
+  it("has exactly twelve capabilities in both locales (adds project leadership and stakeholder management)", () => {
+    expect(aboutContent.capabilities).toHaveLength(12);
     for (const capability of aboutContent.capabilities) {
       expect(capability.label.es.length).toBeGreaterThan(0);
       expect(capability.label.en.length).toBeGreaterThan(0);
@@ -80,12 +82,17 @@ describe("P7 — About capability and experience inventories", () => {
 });
 
 describe("P7 — Work status labels and case inventory", () => {
-  it("has exactly VitaLink and BM Envios, and no other employer implied as a standalone case", () => {
-    expect(workContent.projects.map((project) => project.id)).toEqual(["vitalink", "bm-envios"]);
+  it("orders cards BM Envios, VitaLink, AppliedXL, PilotOrb, Licendi, MEECO, and implies no other employer as a standalone case", () => {
+    expect(workContent.projects.map((project) => project.id)).toEqual([
+      "bm-envios",
+      "vitalink",
+      "appliedxl",
+      "pilotorb",
+      "licendi",
+      "meeco",
+    ]);
     const allText = JSON.stringify(workContent);
-    for (const otherEmployer of ["AppliedXL", "Prezo", "PilotOrb", "Licendi"]) {
-      expect(allText).not.toContain(otherEmployer);
-    }
+    expect(allText).not.toContain("Prezo");
   });
 
   it("labels VitaLink published and BM Envios final refinement in both locales", () => {
@@ -97,10 +104,20 @@ describe("P7 — Work status labels and case inventory", () => {
     expect(bmEnvios?.status.en).toBe("FINAL REFINEMENT");
   });
 
-  it("every project links to its approved public repository", () => {
-    for (const project of workContent.projects) {
-      expect(project.repositoryUrl).toMatch(/^https:\/\/github\.com\/maestreparra\//);
+  it("VitaLink and BM Envios link to their approved public GitHub repository", () => {
+    for (const id of ["vitalink", "bm-envios"]) {
+      const project = workContent.projects.find((p) => p.id === id);
+      expect(project?.repositoryUrl).toMatch(/^https:\/\/github\.com\/maestreparra\//);
     }
+  });
+
+  it("Licendi and MEECO fall back to their approved public-reference URL, superseded by caseStudyRouteKey (P5-QA)", () => {
+    const licendi = workContent.projects.find((p) => p.id === "licendi");
+    const meeco = workContent.projects.find((p) => p.id === "meeco");
+    expect(licendi?.repositoryUrl).toBe("https://licendi.com/es/");
+    expect(licendi?.caseStudyRouteKey).toBe("licendi");
+    expect(meeco?.repositoryUrl).toBe("https://meeco-group.com/");
+    expect(meeco?.caseStudyRouteKey).toBe("meeco");
   });
 });
 
@@ -196,7 +213,7 @@ describe("P7 — About-only structured data", () => {
 describe("P7/P9 — sitemap inventory", () => {
   const sitemap = readFileSync(path.resolve(process.cwd(), "public/sitemap.xml"), "utf8");
 
-  it("contains exactly the twelve localized Home/Core Pages/Case Study URLs (P9-QA)", () => {
+  it("contains exactly the twenty localized Home/Core Pages/Case Study URLs (adds AppliedXL)", () => {
     const locs = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
     expect(locs.sort()).toEqual(
       [
@@ -212,6 +229,14 @@ describe("P7/P9 — sitemap inventory", () => {
         "https://maestreparra.github.io/en/work/vitalink-digital-ecosystem/",
         "https://maestreparra.github.io/es/proyectos/bm-envios-digital-experience/",
         "https://maestreparra.github.io/en/work/bm-envios-digital-experience/",
+        "https://maestreparra.github.io/es/proyectos/licendi-ecommerce-brand-experience/",
+        "https://maestreparra.github.io/en/work/licendi-ecommerce-brand-experience/",
+        "https://maestreparra.github.io/es/proyectos/meeco-renewable-energy-website/",
+        "https://maestreparra.github.io/en/work/meeco-renewable-energy-website/",
+        "https://maestreparra.github.io/es/proyectos/pilotorb-business-intelligence/",
+        "https://maestreparra.github.io/en/work/pilotorb-business-intelligence/",
+        "https://maestreparra.github.io/es/proyectos/appliedxl-ai-data-platform/",
+        "https://maestreparra.github.io/en/work/appliedxl-ai-data-platform/",
       ].sort(),
     );
   });

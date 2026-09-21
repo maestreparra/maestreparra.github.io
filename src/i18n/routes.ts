@@ -11,13 +11,30 @@ export function getAbsoluteUrl(path: string): string {
  * owns its localized paths and template so navigation, locale switching,
  * and metadata all reference one source instead of ad-hoc strings.
  */
-export type PublicRouteKey = "home" | "about" | "work" | "contact" | "vitalink" | "bm-envios";
+export type PublicRouteKey =
+  | "home"
+  | "about"
+  | "work"
+  | "contact"
+  | "vitalink"
+  | "bm-envios"
+  | "licendi"
+  | "meeco"
+  | "pilotorb"
+  | "appliedxl";
 
 export interface PublicRouteEntry {
   key: PublicRouteKey;
   paths: Record<Locale, string>;
   indexable: true;
-  template: "home" | "editorial-profile" | "project-index" | "contact-links" | "case-study";
+  template:
+    | "home"
+    | "editorial-profile"
+    | "project-index"
+    | "contact-links"
+    | "case-study"
+    | "derived-evidence-case-study"
+    | "single-flow-case-study";
 }
 
 export const publicRoutes: Record<PublicRouteKey, PublicRouteEntry> = {
@@ -56,6 +73,30 @@ export const publicRoutes: Record<PublicRouteKey, PublicRouteEntry> = {
     paths: { es: "/es/proyectos/bm-envios-digital-experience/", en: "/en/work/bm-envios-digital-experience/" },
     indexable: true,
     template: "case-study",
+  },
+  licendi: {
+    key: "licendi",
+    paths: { es: "/es/proyectos/licendi-ecommerce-brand-experience/", en: "/en/work/licendi-ecommerce-brand-experience/" },
+    indexable: true,
+    template: "derived-evidence-case-study",
+  },
+  meeco: {
+    key: "meeco",
+    paths: { es: "/es/proyectos/meeco-renewable-energy-website/", en: "/en/work/meeco-renewable-energy-website/" },
+    indexable: true,
+    template: "derived-evidence-case-study",
+  },
+  pilotorb: {
+    key: "pilotorb",
+    paths: { es: "/es/proyectos/pilotorb-business-intelligence/", en: "/en/work/pilotorb-business-intelligence/" },
+    indexable: true,
+    template: "single-flow-case-study",
+  },
+  appliedxl: {
+    key: "appliedxl",
+    paths: { es: "/es/proyectos/appliedxl-ai-data-platform/", en: "/en/work/appliedxl-ai-data-platform/" },
+    indexable: true,
+    template: "single-flow-case-study",
   },
 };
 

@@ -16,11 +16,22 @@
 }
 
 .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
   font: var(--text-heading-h4);
   color: var(--color-text-primary);
   margin: 0;
   text-decoration: none;
   white-space: nowrap;
+}
+
+.brandAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 /* Mobile disclosure (< 768px): reproduces the Figma "ES/EN · Menu" affordance. */

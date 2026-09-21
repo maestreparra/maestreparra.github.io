@@ -1,0 +1,53 @@
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin: 0;
+  padding: var(--spacing-lg);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.title {
+  font: var(--text-heading-h4);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.figureNumber {
+  font: var(--text-evidence-mono);
+  letter-spacing: 0.6px;
+  color: var(--color-text-secondary);
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+}
+
+.footer {
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--color-border-default);
+}
+
+.caption {
+  font: var(--text-body-small);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.provenance {
+  font: var(--text-evidence-mono);
+  letter-spacing: 0.6px;
+  color: var(--color-text-accent);
+  margin: var(--spacing-xs) 0 0;
+}

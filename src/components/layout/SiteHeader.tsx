@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Image from "next/image";
 import type { Locale } from "@/i18n/locales";
 import { getRoutePath, primaryNavigationRouteKeys, type PrimaryNavigationRouteKey, type PublicRouteKey } from "@/i18n/routes";
 import { homeContent, localize } from "@/content/home";
@@ -76,6 +77,14 @@ export function SiteHeader({ locale, currentRouteKey }: SiteHeaderProps) {
   return (
     <header className={styles.header}>
       <a className={styles.brand} href={getRoutePath("home", locale)}>
+        <Image
+          className={styles.brandAvatar}
+          src="/images/brand/giomar-avatar.webp"
+          alt=""
+          width={32}
+          height={32}
+          priority
+        />
         {brandName}
       </a>
 

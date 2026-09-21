@@ -48,6 +48,8 @@ export const aboutContent: AboutContent = {
   capabilitiesHeading: { es: "Capacidades", en: "Capabilities" },
   capabilities: [
     { id: "product-strategy", label: { es: "Product strategy y discovery", en: "Product strategy and discovery" } },
+    { id: "project-leadership", label: { es: "Liderazgo de proyectos técnicos", en: "Technical project leadership" } },
+    { id: "stakeholder-management", label: { es: "Gestión de stakeholders", en: "Stakeholder management" } },
     { id: "user-research", label: { es: "User Research", en: "User research" } },
     { id: "service-design", label: { es: "Service Design", en: "Service design" } },
     { id: "information-architecture", label: { es: "Information Architecture", en: "Information architecture" } },
@@ -134,7 +136,7 @@ export interface WorkProjectContent {
    * study instead of the external repository (P9-QA: Work-card migration,
    * only once all four case-study routes exist).
    */
-  caseStudyRouteKey?: "vitalink" | "bm-envios";
+  caseStudyRouteKey?: "vitalink" | "bm-envios" | "licendi" | "meeco" | "pilotorb" | "appliedxl";
 }
 
 export interface WorkContent {
@@ -169,6 +171,20 @@ export const workContent: WorkContent = {
   },
   projects: [
     {
+      id: "bm-envios",
+      publicationStatus: "final-refinement",
+      status: { es: "REFINAMIENTO FINAL", en: "FINAL REFINEMENT" },
+      title: { es: "BM Envíos Digital Experience", en: "BM Envios Digital Experience" },
+      summary: {
+        es: "Research, arquitectura de información, diseño bilingüe e implementación Next.js para una plataforma logística y de generación de leads.",
+        en: "A bilingual logistics platform for US-to-Latin-America shipping and a Miami mailbox service, with demonstration forms that transmit and store no data.",
+      },
+      scope: { es: "RESEARCH · IA · UX/UI · NEXT.JS", en: "RESEARCH · INFORMATION ARCHITECTURE · UX/UI · NEXT.JS · I18N" },
+      action: { es: "Ver proyecto →", en: "View project →" },
+      repositoryUrl: "https://github.com/maestreparra/bm-envios-digital-platform",
+      caseStudyRouteKey: "bm-envios",
+    },
+    {
       id: "vitalink",
       publicationStatus: "published",
       status: { es: "CASO PUBLICADO", en: "PUBLISHED CASE STUDY" },
@@ -188,18 +204,60 @@ export const workContent: WorkContent = {
       caseStudyRouteKey: "vitalink",
     },
     {
-      id: "bm-envios",
-      publicationStatus: "final-refinement",
-      status: { es: "REFINAMIENTO FINAL", en: "FINAL REFINEMENT" },
-      title: { es: "BM Envíos Digital Experience", en: "BM Envios Digital Experience" },
+      id: "appliedxl",
+      publicationStatus: "published",
+      status: { es: "CASO DOCUMENTADO", en: "DOCUMENTED CASE" },
+      title: { es: "AppliedXL AI & Data Platform", en: "AppliedXL AI & Data Platform" },
       summary: {
-        es: "Research, arquitectura de información, diseño bilingüe e implementación Next.js para una plataforma logística y de generación de leads.",
-        en: "A bilingual logistics platform for US-to-Latin-America shipping and a Miami mailbox service, with demonstration forms that transmit and store no data.",
+        es: "Discovery, research y arquitectura de información para una plataforma SaaS B2B que usa IA y datos científicos para evaluar oportunidades de inversión.",
+        en: "Discovery, research, and information architecture for a B2B SaaS platform that uses AI and scientific data to evaluate investment opportunities.",
       },
-      scope: { es: "RESEARCH · IA · UX/UI · NEXT.JS", en: "RESEARCH · INFORMATION ARCHITECTURE · UX/UI · NEXT.JS · I18N" },
-      action: { es: "Ver proyecto →", en: "View project →" },
-      repositoryUrl: "https://github.com/maestreparra/bm-envios-digital-platform",
-      caseStudyRouteKey: "bm-envios",
+      scope: { es: "DISCOVERY · USER RESEARCH · ARQUITECTURA DE INFORMACIÓN · DATA VISUALIZATION", en: "DISCOVERY · USER RESEARCH · INFORMATION ARCHITECTURE · DATA VISUALIZATION" },
+      action: { es: "Ver caso completo", en: "Read the case study" },
+      repositoryUrl: "/es/proyectos/appliedxl-ai-data-platform/",
+      caseStudyRouteKey: "appliedxl",
+    },
+    {
+      id: "pilotorb",
+      publicationStatus: "published",
+      status: { es: "CASO DOCUMENTADO", en: "DOCUMENTED CASE" },
+      title: { es: "PilotOrb Business Intelligence", en: "PilotOrb Business Intelligence" },
+      summary: {
+        es: "Discovery, arquitectura de información y diseño de dashboards para una plataforma de Business Intelligence que convierte datos de QuickBooks Online en decisiones de negocio.",
+        en: "Discovery, information architecture, and dashboard design for a Business Intelligence platform turning QuickBooks Online data into business decisions.",
+      },
+      scope: { es: "DISCOVERY · ARQUITECTURA DE INFORMACIÓN · DATA VISUALIZATION", en: "DISCOVERY · INFORMATION ARCHITECTURE · DATA VISUALIZATION" },
+      action: { es: "Ver caso completo", en: "Read the case study" },
+      repositoryUrl: "/es/proyectos/pilotorb-business-intelligence/",
+      caseStudyRouteKey: "pilotorb",
+    },
+    {
+      id: "licendi",
+      publicationStatus: "published",
+      status: { es: "CASO DOCUMENTADO", en: "DOCUMENTED CASE" },
+      title: { es: "Licendi E-commerce & Brand Experience", en: "Licendi E-commerce & Brand Experience" },
+      summary: {
+        es: "Auditoría UX/UI, arquitectura de e-commerce, rebranding y diseño responsive de los principales journeys de compra de una plataforma internacional de licencias de software.",
+        en: "UX/UI audit, e-commerce architecture, rebranding, and responsive design for the core purchasing journeys of an international software-licensing platform.",
+      },
+      scope: { es: "AUDITORÍA UX/UI · E-COMMERCE · REBRANDING · RESPONSIVE", en: "UX/UI AUDIT · E-COMMERCE · REBRANDING · RESPONSIVE" },
+      action: { es: "Ver caso completo", en: "Read the case study" },
+      repositoryUrl: "https://licendi.com/es/",
+      caseStudyRouteKey: "licendi",
+    },
+    {
+      id: "meeco",
+      publicationStatus: "published",
+      status: { es: "CASO DOCUMENTADO", en: "DOCUMENTED CASE" },
+      title: { es: "MEECO Renewable Energy Website", en: "MEECO Renewable Energy Website" },
+      summary: {
+        es: "Rediseño de una experiencia corporativa internacional que organiza productos, servicios, inversión solar, proyectos y contenido institucional para desktop y mobile.",
+        en: "Redesign of an international corporate experience organizing products, services, solar investment, projects, and company content across desktop and mobile.",
+      },
+      scope: { es: "INFORMATION ARCHITECTURE · UX/UI · RESPONSIVE · MULTILINGÜE", en: "INFORMATION ARCHITECTURE · UX/UI · RESPONSIVE · MULTILINGUAL" },
+      action: { es: "Ver caso completo", en: "Read the case study" },
+      repositoryUrl: "https://meeco-group.com/",
+      caseStudyRouteKey: "meeco",
     },
   ],
   legendHeading: { es: "Cómo leer el estado", en: "How to read the status" },

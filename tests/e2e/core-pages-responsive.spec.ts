@@ -88,19 +88,27 @@ test.describe("P7-QA-01 — Contact mobile matches the frozen Figma composition 
     // Applying the reservation PageHero-wide made Work's total mobile
     // height overshoot Figma by +11.5% during this correction's own
     // investigation; this guards against that regression recurring.
+    // Baseline updated for P5: Work gained the Licendi and MEECO cards,
+    // which legitimately grows the page beyond the pre-P5 Figma frame
+    // (23:6). Updated again after adding the PilotOrb card, then again
+    // after adding AppliedXL (D-030, sixth card completing the 3x2 grid).
+    // This is the measured post-P5 static-export baseline, not a new Figma
+    // cross-check — that remains pending Sol's independent QA.
     await page.setViewportSize({ width: 390, height: 900 });
     await page.goto("/es/proyectos/");
     const workHeight = await page.evaluate(() => document.documentElement.scrollHeight);
-    expect(Math.abs(workHeight - 3008), "Work ES 390px vs Figma 23:6 (3008px)").toBeLessThanOrEqual(80);
+    expect(Math.abs(workHeight - 5043), "Work ES 390px measured baseline after AppliedXL (5043px)").toBeLessThanOrEqual(80);
 
     // About's own +173px (+3.7%) gap versus Figma pre-dates this correction
     // and About's composition is denylisted this round (out of scope for
     // P7-QA-01); this loose bound only guards against a *new* large
     // regression (e.g. the PageHero-wide min-height mistake above), not a
-    // tight Figma-parity claim.
+    // tight Figma-parity claim. Baseline updated after adding the "Liderazgo
+    // de proyectos técnicos" and "Gestión de stakeholders" capability tags,
+    // which legitimately grow the Capabilities list from 10 to 12 items.
     await page.goto("/es/sobre-mi/");
     const aboutHeight = await page.evaluate(() => document.documentElement.scrollHeight);
-    expect(Math.abs(aboutHeight - 4698), "About ES 390px vs Figma 23:4 (4698px)").toBeLessThanOrEqual(200);
+    expect(Math.abs(aboutHeight - 5015), "About ES 390px measured baseline after the PM capability tags (5015px)").toBeLessThanOrEqual(200);
   });
 
   test("P11 Contact ES/EN full-page height includes the approved fourth contact card without layout drift", async ({ page }) => {

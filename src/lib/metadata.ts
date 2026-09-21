@@ -69,6 +69,46 @@ const routeMetadataCopy: Record<PublicRouteKey, { title: Record<Locale, string>;
       en: "Research, UX/UI, localization, and Next.js delivery for a bilingual logistics platform with privacy-safe demonstration forms.",
     },
   },
+  licendi: {
+    title: {
+      es: "Licendi: UX, e-commerce y rebranding | Giomar Maestre",
+      en: "Licendi: UX, E-commerce & Rebranding | Giomar Maestre",
+    },
+    description: {
+      es: "Caso de estudio sobre auditoría UX/UI, arquitectura de e-commerce, rebranding y diseño responsive para una plataforma internacional de licencias.",
+      en: "Case study covering UX/UI auditing, e-commerce architecture, rebranding, and responsive design for an international software-licensing platform.",
+    },
+  },
+  meeco: {
+    title: {
+      es: "MEECO: UX/UI para energía renovable | Giomar Maestre",
+      en: "MEECO: Renewable Energy Website UX/UI | Giomar Maestre",
+    },
+    description: {
+      es: "Caso de estudio sobre arquitectura de información, UX/UI y diseño responsive para un website corporativo internacional de energía renovable.",
+      en: "Case study covering information architecture, UX/UI, and responsive design for an international renewable-energy corporate website.",
+    },
+  },
+  pilotorb: {
+    title: {
+      es: "PilotOrb: Business Intelligence y Data Visualization | Giomar Maestre",
+      en: "PilotOrb: Business Intelligence & Data Visualization | Giomar Maestre",
+    },
+    description: {
+      es: "Caso de estudio sobre discovery, arquitectura de información y diseño de dashboards para una plataforma de Business Intelligence integrada con QuickBooks Online.",
+      en: "Case study covering discovery, information architecture, and dashboard design for a Business Intelligence platform integrated with QuickBooks Online.",
+    },
+  },
+  appliedxl: {
+    title: {
+      es: "AppliedXL: IA y datos científicos | Giomar Maestre",
+      en: "AppliedXL: AI & Scientific Data | Giomar Maestre",
+    },
+    description: {
+      es: "Caso de estudio sobre discovery, arquitectura de información y visualización de datos para una plataforma SaaS B2B de IA y datos científicos.",
+      en: "Case study covering discovery, information architecture, and data visualization for a B2B SaaS AI and scientific-data platform.",
+    },
+  },
 };
 
 /**
@@ -96,7 +136,17 @@ export function buildRouteMetadata(routeKey: PublicRouteKey, locale: Locale): Me
       description: description[locale],
       url,
       locale: locale === "es" ? "es_ES" : "en_US",
-      type: routeKey === "about" ? "profile" : routeKey === "vitalink" || routeKey === "bm-envios" ? "article" : "website",
+      type:
+        routeKey === "about"
+          ? "profile"
+          : routeKey === "vitalink" ||
+              routeKey === "bm-envios" ||
+              routeKey === "licendi" ||
+              routeKey === "meeco" ||
+              routeKey === "pilotorb" ||
+              routeKey === "appliedxl"
+            ? "article"
+            : "website",
     },
   };
 }

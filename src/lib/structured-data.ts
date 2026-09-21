@@ -1,7 +1,11 @@
 import type { Locale } from "@/i18n/locales";
-import { getAbsoluteUrl, getRoutePath } from "@/i18n/routes";
+import { getAbsoluteUrl, getRoutePath, type PublicRouteKey } from "@/i18n/routes";
 import { homeContent, localize } from "@/content/home";
 import { caseStudies, type CaseStudyId } from "@/content/case-studies";
+import { licendiMeecoCaseStudies, type LicendiMeecoCaseId } from "@/content/licendi-meeco";
+import type { SingleFlowCaseContent } from "@/content/single-flow-case";
+import { pilotorbCaseContent } from "@/content/pilotorb";
+import { appliedxlCaseContent } from "@/content/appliedxl";
 
 /**
  * The approved public professional title (identical in both locales, per
@@ -66,4 +70,77 @@ export function buildCaseStudyStructuredData(caseId: CaseStudyId, locale: Locale
   };
 
   return JSON.stringify(data).replace(/</g, "\\u003c");
+}
+
+/**
+ * CreativeWork only, per the P5 contract: no Product, Service, Offer,
+ * Organization, LocalBusiness, Review, or rating schema, and no client as
+ * `publisher`. `isPartOf` references the portfolio site itself rather than
+ * inventing an organization for either client.
+ */
+export function buildDerivedEvidenceCaseStudyStructuredData(caseId: LicendiMeecoCaseId, locale: Locale): string {
+  const c = licendiMeecoCaseStudies[caseId];
+  const url = getAbsoluteUrl(getRoutePath(caseId, locale));
+
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: localize(c.title, locale),
+    description: localize(c.introduction, locale),
+    url,
+    inLanguage: locale,
+    dateModified: "2026-09-20",
+    author: {
+      "@type": "Person",
+      name: homeContent.brandName,
+    },
+    isPartOf: {
+      "@type": "WebSite",
+      name: homeContent.brandName,
+      url: getAbsoluteUrl("/"),
+    },
+  };
+
+  return JSON.stringify(data).replace(/</g, "\\u003c");
+}
+
+/**
+ * CreativeWork only, matching the same schema boundary as
+ * buildDerivedEvidenceCaseStudyStructuredData: no Product, Service, Offer,
+ * Organization, LocalBusiness, Review, or rating schema, and no client as
+ * `publisher`. Shared by PilotOrb and AppliedXL, which document early-stage
+ * discovery/design engagements rather than shipped products, so no claim
+ * about a live product is made beyond the portfolio site itself.
+ */
+function buildSingleFlowCaseStructuredData(routeKey: PublicRouteKey, content: SingleFlowCaseContent, locale: Locale): string {
+  const url = getAbsoluteUrl(getRoutePath(routeKey, locale));
+
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: localize(content.title, locale),
+    description: localize(content.introduction, locale),
+    url,
+    inLanguage: locale,
+    dateModified: "2026-09-20",
+    author: {
+      "@type": "Person",
+      name: homeContent.brandName,
+    },
+    isPartOf: {
+      "@type": "WebSite",
+      name: homeContent.brandName,
+      url: getAbsoluteUrl("/"),
+    },
+  };
+
+  return JSON.stringify(data).replace(/</g, "\\u003c");
+}
+
+export function buildPilotOrbStructuredData(locale: Locale): string {
+  return buildSingleFlowCaseStructuredData("pilotorb", pilotorbCaseContent, locale);
+}
+
+export function buildAppliedXLStructuredData(locale: Locale): string {
+  return buildSingleFlowCaseStructuredData("appliedxl", appliedxlCaseContent, locale);
 }

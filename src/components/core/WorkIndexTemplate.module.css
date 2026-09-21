@@ -65,8 +65,13 @@
 }
 
 @media (min-width: 1024px) {
+  /* Six documented cases (D-030): three columns by two rows instead of a
+     single equally-shared row, so the grid reads as a fixed 3×2 gallery
+     rather than stretching six cards ever-thinner in one line. */
   .projectGrid {
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: stretch;
   }
 }
 

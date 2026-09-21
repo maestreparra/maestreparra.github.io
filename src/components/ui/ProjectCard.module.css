@@ -13,10 +13,10 @@
 
 @media (min-width: 1024px) {
   .card {
-    /* Row layout at desktop: share width equally, no forced main-axis
-       flex-basis on the (now horizontal) axis. */
-    flex: 1 1 0;
-    width: auto;
+    /* Grid layout at desktop (3 columns × 2 rows, D-030): the grid track
+       sizes the column, so the card fills its cell and stretches to row height. */
+    width: 100%;
+    height: 100%;
   }
 }
 

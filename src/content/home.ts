@@ -211,6 +211,26 @@ export const homeContent: HomeContent = {
         action: { es: "Ver proyecto →", en: "View project →" },
         repositoryUrl: "https://github.com/maestreparra/bm-envios-digital-platform",
       },
+      {
+        id: "licendi",
+        publicationStatus: "published",
+        status: { es: "CASO DOCUMENTADO", en: "DOCUMENTED CASE" },
+        title: { es: "Licendi E-commerce & Brand Experience", en: "Licendi E-commerce & Brand Experience" },
+        summary: {
+          es: "Auditoría UX/UI, arquitectura de e-commerce, rebranding y diseño responsive de los principales journeys de compra de una plataforma internacional de licencias de software.",
+          en: "UX/UI audit, e-commerce architecture, rebranding, and responsive design for the core purchasing journeys of an international software-licensing platform.",
+        },
+        scope: { es: "AUDITORÍA UX/UI · E-COMMERCE · REBRANDING · RESPONSIVE", en: "UX/UI AUDIT · E-COMMERCE · REBRANDING · RESPONSIVE" },
+        action: { es: "Ver caso completo", en: "Read the case study" },
+        // HomeTemplate.tsx always renders this field as an external-style
+        // action (P5 contract Section 13 flags this as a known deviation:
+        // HomeTemplate has no internal/caseStudyRouteKey support, unlike
+        // WorkIndexTemplate). Pointing it at the internal case-study path
+        // still navigates correctly; it just opens in a new tab instead of
+        // in place, which is reported to Sol/Gio rather than silently fixed
+        // by editing the denylisted HomeTemplate.tsx.
+        repositoryUrl: "/es/proyectos/licendi-ecommerce-brand-experience/",
+      },
     ],
   },
   experience: {

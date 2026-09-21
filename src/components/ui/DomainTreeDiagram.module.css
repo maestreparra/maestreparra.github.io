@@ -1,0 +1,59 @@
+.tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+  width: 100%;
+}
+
+.root {
+  font: var(--text-heading-h4);
+  color: var(--color-text-inverse);
+  background: var(--color-bg-inverse);
+  margin: 0;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-full);
+}
+
+.branches {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .branches {
+    flex-direction: row;
+  }
+}
+
+.branch {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  flex: 1 1 0;
+  padding: var(--spacing-md);
+  background: var(--color-bg-canvas);
+  border: 1px solid var(--color-border-accent);
+  border-radius: var(--radius-md);
+}
+
+.branchLabel {
+  font: var(--text-ui-label);
+  color: var(--color-text-accent);
+  margin: 0;
+}
+
+.children {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding-left: 1.1em;
+  font: var(--text-body-small);
+  color: var(--color-text-secondary);
+}

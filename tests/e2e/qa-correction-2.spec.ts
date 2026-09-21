@@ -2,11 +2,15 @@ import { test, expect } from "@playwright/test";
 import { readFileSync, existsSync, mkdirSync, statSync } from "node:fs";
 import path from "node:path";
 
+// Updated for P5: Home's selectedWork.projects gained a third card (Licendi),
+// which legitimately grows the page beyond the pre-P5 frozen Figma frame.
+// These targets are the measured static-export baseline post-P5, not a new
+// Figma cross-check — that remains pending Sol's independent QA.
 const HEIGHT_TARGETS: Record<string, number> = {
-  "es-390": 4464,
-  "en-390": 4460,
-  "es-1440": 3430,
-  "en-1440": 3430,
+  "es-390": 5038,
+  "en-390": 4984,
+  "es-1440": 3523,
+  "en-1440": 3497,
 };
 const HEIGHT_TOLERANCE = 80;
 
