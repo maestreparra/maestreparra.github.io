@@ -100,6 +100,18 @@ describe("PilotOrb — content inventory and bilingual parity", () => {
     }
   });
 
+  it("P13 Section 8.2 — features 3 evidence figures by default (1 brand + 2 product); the remaining 3 product slides stay available, not deleted", () => {
+    expect(c.realEvidence.featuredProductCount).toBe(2);
+    const brandCount = (c.realEvidence.brandSlides ?? []).length;
+    expect(brandCount + c.realEvidence.featuredProductCount).toBe(3);
+    expect(c.realEvidence.productSlides.length - c.realEvidence.featuredProductCount).toBe(3);
+  });
+
+  it("PilotOrb's authorization and scope claims remain unchanged by P13 (Section 7.3)", () => {
+    expect(c.disclosure.es).toMatch(/quienes autorizaron reproducir en este portafolio las pantallas del diseño final/);
+    expect(c.disclosure.en).toMatch(/who authorized reproducing the final design screens/);
+  });
+
   it("uses the documented-case verified-evidence status in both locales (Mode A)", () => {
     expect(c.statusLabel.es).toBe("CASO DOCUMENTADO · EVIDENCIA VERIFICADA");
     expect(c.statusLabel.en).toBe("DOCUMENTED CASE · VERIFIED EVIDENCE");

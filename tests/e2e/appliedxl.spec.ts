@@ -44,11 +44,18 @@ test.describe("AppliedXL — skip link and functional breadcrumb", () => {
 });
 
 test.describe("AppliedXL — visible documented-case status and real evidence (Mode A)", () => {
-  test("shows CASO DOCUMENTADO · EVIDENCIA VERIFICADA / DOCUMENTED CASE · VERIFIED EVIDENCE", async ({ page }) => {
+  test("shows CASO DOCUMENTADO · EVIDENCIA PREFINAL AUTORIZADA / DOCUMENTED CASE · AUTHORIZED PRE-FINAL EVIDENCE (P13)", async ({ page }) => {
     await page.goto("/es/proyectos/appliedxl-ai-data-platform/");
-    await expect(page.getByText("CASO DOCUMENTADO · EVIDENCIA VERIFICADA").first()).toBeVisible();
+    await expect(page.getByText("CASO DOCUMENTADO · EVIDENCIA PREFINAL AUTORIZADA").first()).toBeVisible();
     await page.goto("/en/work/appliedxl-ai-data-platform/");
-    await expect(page.getByText("DOCUMENTED CASE · VERIFIED EVIDENCE").first()).toBeVisible();
+    await expect(page.getByText("DOCUMENTED CASE · AUTHORIZED PRE-FINAL EVIDENCE").first()).toBeVisible();
+  });
+
+  test("identifies AppliedXL publicly (breadcrumb + H1) while XYZ stays only the internal evidence identifier, never the client's name", async ({ page }) => {
+    await page.goto("/es/proyectos/appliedxl-ai-data-platform/");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("AppliedXL");
+    const breadcrumb = page.getByRole("navigation", { name: /breadcrumb|ruta de navegación/i });
+    await expect(breadcrumb).toContainText("AppliedXL");
   });
 
   for (const route of ROUTES) {

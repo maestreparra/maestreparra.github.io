@@ -112,6 +112,24 @@ const routeMetadataCopy: Record<PublicRouteKey, { title: Record<Locale, string>;
 };
 
 /**
+ * Portfolio-owned 1200x630 social preview cards (P13, Section 11): one card
+ * per case study plus a default card reused for Home/About/Work/Contact,
+ * which have no dedicated case-study identity of their own.
+ */
+const socialImageSlug: Record<PublicRouteKey, string> = {
+  home: "home",
+  about: "home",
+  work: "home",
+  contact: "home",
+  vitalink: "vitalink",
+  "bm-envios": "bm-envios",
+  licendi: "licendi",
+  meeco: "meeco",
+  pilotorb: "pilotorb",
+  appliedxl: "appliedxl",
+};
+
+/**
  * One generic, typed metadata builder for every public route, rather than
  * six copied metadata objects.
  */
@@ -119,6 +137,18 @@ export function buildRouteMetadata(routeKey: PublicRouteKey, locale: Locale): Me
   const path = getRoutePath(routeKey, locale);
   const url = getAbsoluteUrl(path);
   const { title, description } = routeMetadataCopy[routeKey];
+  const socialImageUrl = getAbsoluteUrl(`/images/social/${socialImageSlug[routeKey]}.png`);
+  const ogType =
+    routeKey === "about"
+      ? "profile"
+      : routeKey === "vitalink" ||
+          routeKey === "bm-envios" ||
+          routeKey === "licendi" ||
+          routeKey === "meeco" ||
+          routeKey === "pilotorb" ||
+          routeKey === "appliedxl"
+        ? "article"
+        : "website";
 
   return {
     title: title[locale],
@@ -136,17 +166,14 @@ export function buildRouteMetadata(routeKey: PublicRouteKey, locale: Locale): Me
       description: description[locale],
       url,
       locale: locale === "es" ? "es_ES" : "en_US",
-      type:
-        routeKey === "about"
-          ? "profile"
-          : routeKey === "vitalink" ||
-              routeKey === "bm-envios" ||
-              routeKey === "licendi" ||
-              routeKey === "meeco" ||
-              routeKey === "pilotorb" ||
-              routeKey === "appliedxl"
-            ? "article"
-            : "website",
+      type: ogType,
+      images: [{ url: socialImageUrl, width: 1200, height: 630, alt: title[locale] }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: title[locale],
+      description: description[locale],
+      images: [socialImageUrl],
     },
   };
 }

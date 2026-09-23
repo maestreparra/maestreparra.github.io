@@ -12,6 +12,14 @@ export interface SingleFlowRealEvidence {
   brandSlides?: RealEvidenceSlide[];
   productSectionLabel: LocalizedValue;
   productSlides: RealEvidenceSlide[];
+  /**
+   * Recruiter-first evidence architecture (P13, Section 8.2): how many
+   * product slides are visible on first scan before the EvidenceDisclosure
+   * control. Brand slides (usually just one logo) always stay visible. The
+   * remaining, still-authorized slides stay in the DOM behind the
+   * disclosure — nothing is deleted.
+   */
+  featuredProductCount: number;
 }
 
 /**

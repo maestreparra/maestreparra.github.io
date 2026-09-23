@@ -167,6 +167,26 @@ describe("P5-QA — Licendi/MEECO content inventory and bilingual parity", () =>
     }
   });
 
+  it("P13 Section 8.2 — Licendi features 1 research + 2 brand + 2 product flows by default; the rest (1 research + 1 brand + 3 flows) stays available, not deleted", () => {
+    const evidence = licendiMeecoCaseStudies.licendi.realEvidence;
+    expect(evidence).toBeDefined();
+    if (!evidence) return;
+    expect(evidence.featuredResearchCount).toBe(1);
+    expect(evidence.featuredBrandCount).toBe(2);
+    expect(evidence.featuredProductFlowCount).toBe(2);
+    expect((evidence.researchSlides ?? []).length - evidence.featuredResearchCount!).toBe(1);
+    expect((evidence.brandSlides ?? []).length - evidence.featuredBrandCount!).toBe(1);
+    expect(evidence.productFlows.length - evidence.featuredProductFlowCount).toBe(3);
+  });
+
+  it("P13 Section 8.2 — MEECO features 2 product flows by default; the remaining 3 stay available, not deleted", () => {
+    const evidence = licendiMeecoCaseStudies.meeco.realEvidence;
+    expect(evidence).toBeDefined();
+    if (!evidence) return;
+    expect(evidence.featuredProductFlowCount).toBe(2);
+    expect(evidence.productFlows.length - evidence.featuredProductFlowCount).toBe(3);
+  });
+
   it("never claims Licendi's real evidence is a portfolio reconstruction", () => {
     const serialized = JSON.stringify(licendiMeecoCaseStudies.licendi.realEvidence);
     expect(serialized).not.toMatch(/reconstruc/i);
@@ -202,9 +222,16 @@ describe("P5-QA — Licendi/MEECO content inventory and bilingual parity", () =>
 describe("P5-QA — Licendi content and link boundary", () => {
   const licendi = licendiMeecoCaseStudies.licendi;
 
-  it("uses the verified-evidence status (Mode A, agency-authorized), distinct from MEECO's reconstructed-evidence status", () => {
-    expect(licendi.statusLabel.es).toBe("CASO DOCUMENTADO · EVIDENCIA VERIFICADA");
-    expect(licendi.statusLabel.en).toBe("DOCUMENTED CASE · VERIFIED EVIDENCE");
+  it("uses the authorized-pre-final-evidence status (Mode A, agency-authorized, not the final approved client delivery)", () => {
+    expect(licendi.statusLabel.es).toBe("CASO DOCUMENTADO · EVIDENCIA PREFINAL AUTORIZADA");
+    expect(licendi.statusLabel.en).toBe("DOCUMENTED CASE · AUTHORIZED PRE-FINAL EVIDENCE");
+  });
+
+  it("never calls its own evidence the final approved client delivery, and states the product may have evolved", () => {
+    for (const field of [licendi.evidenceIntro, licendi.limitationsBody, licendi.disclosure]) {
+      expect(field.es).toMatch(/no reproducen la entrega final aprobada|no representan la entrega final aprobada/);
+      expect(field.en).toMatch(/do not reproduce the client's final approved delivery|do not represent the client's final approved delivery/);
+    }
   });
 
   it("exposes exactly three actions: external public reference, internal related case, internal back-to-work", () => {
@@ -221,9 +248,16 @@ describe("P5-QA — Licendi content and link boundary", () => {
 describe("P5-QA — MEECO content and link boundary", () => {
   const meeco = licendiMeecoCaseStudies.meeco;
 
-  it("uses the verified-evidence status (Mode A, agency-authorized), matching Licendi's", () => {
-    expect(meeco.statusLabel.es).toBe("CASO DOCUMENTADO · EVIDENCIA VERIFICADA");
-    expect(meeco.statusLabel.en).toBe("DOCUMENTED CASE · VERIFIED EVIDENCE");
+  it("uses the authorized-pre-final-evidence status (Mode A, agency-authorized), matching Licendi's", () => {
+    expect(meeco.statusLabel.es).toBe("CASO DOCUMENTADO · EVIDENCIA PREFINAL AUTORIZADA");
+    expect(meeco.statusLabel.en).toBe("DOCUMENTED CASE · AUTHORIZED PRE-FINAL EVIDENCE");
+  });
+
+  it("never calls its own evidence the final approved client delivery, and states the product may have evolved", () => {
+    for (const field of [meeco.evidenceIntro, meeco.limitationsBody, meeco.disclosure]) {
+      expect(field.es).toMatch(/no representan la entrega final aprobada|no reproducen la entrega final aprobada/);
+      expect(field.en).toMatch(/do not represent the client's final approved delivery|do not reproduce the client's final approved delivery/);
+    }
   });
 
   it("exposes exactly three actions: external public reference, internal related case, internal back-to-work", () => {

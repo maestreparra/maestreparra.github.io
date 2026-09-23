@@ -61,18 +61,90 @@ test.describe("P5-QA — the breadcrumb parent always links to Work", () => {
 });
 
 test.describe("P5-QA — visible documented-case status badge on every route", () => {
-  test("Licendi shows CASO DOCUMENTADO · EVIDENCIA VERIFICADA / DOCUMENTED CASE · VERIFIED EVIDENCE (Mode A, agency-authorized)", async ({ page }) => {
+  test("Licendi shows CASO DOCUMENTADO · EVIDENCIA PREFINAL AUTORIZADA / DOCUMENTED CASE · AUTHORIZED PRE-FINAL EVIDENCE (Mode A, P13)", async ({ page }) => {
     await page.goto("/es/proyectos/licendi-ecommerce-brand-experience/");
-    await expect(page.getByText("CASO DOCUMENTADO · EVIDENCIA VERIFICADA").first()).toBeVisible();
+    await expect(page.getByText("CASO DOCUMENTADO · EVIDENCIA PREFINAL AUTORIZADA").first()).toBeVisible();
     await page.goto("/en/work/licendi-ecommerce-brand-experience/");
-    await expect(page.getByText("DOCUMENTED CASE · VERIFIED EVIDENCE").first()).toBeVisible();
+    await expect(page.getByText("DOCUMENTED CASE · AUTHORIZED PRE-FINAL EVIDENCE").first()).toBeVisible();
   });
 
-  test("MEECO shows CASO DOCUMENTADO · EVIDENCIA VERIFICADA / DOCUMENTED CASE · VERIFIED EVIDENCE (Mode A, agency-authorized)", async ({ page }) => {
+  test("MEECO shows CASO DOCUMENTADO · EVIDENCIA PREFINAL AUTORIZADA / DOCUMENTED CASE · AUTHORIZED PRE-FINAL EVIDENCE (Mode A, P13)", async ({ page }) => {
     await page.goto("/es/proyectos/meeco-renewable-energy-website/");
-    await expect(page.getByText("CASO DOCUMENTADO · EVIDENCIA VERIFICADA").first()).toBeVisible();
+    await expect(page.getByText("CASO DOCUMENTADO · EVIDENCIA PREFINAL AUTORIZADA").first()).toBeVisible();
     await page.goto("/en/work/meeco-renewable-energy-website/");
-    await expect(page.getByText("DOCUMENTED CASE · VERIFIED EVIDENCE").first()).toBeVisible();
+    await expect(page.getByText("DOCUMENTED CASE · AUTHORIZED PRE-FINAL EVIDENCE").first()).toBeVisible();
+  });
+});
+
+test.describe("P13 — recruiter-first progressive evidence disclosure", () => {
+  test("Licendi ES: 5 featured evidence figures are visible before expanding; the disclosure reveals the remaining 5 (10 total, none deleted)", async ({ page }) => {
+    await page.goto("/es/proyectos/licendi-ecommerce-brand-experience/");
+    await expect(page.locator("figure")).toHaveCount(10);
+    const details = page.locator("details", { has: page.getByText("Explorar evidencia adicional") });
+    await expect(details.locator("figure")).toHaveCount(5);
+    await details.locator("summary").click();
+    await expect(page.getByText("Ocultar evidencia adicional")).toBeVisible();
+    await expect(details.locator("figure")).toHaveCount(5);
+    await expect(page.locator("figure")).toHaveCount(10);
+  });
+
+  test("MEECO EN: the disclosure control is keyboard-operable and toggles the translated label", async ({ page }) => {
+    await page.goto("/en/work/meeco-renewable-energy-website/");
+    const summary = page.locator("summary", { hasText: "Explore additional evidence" });
+    await summary.focus();
+    await expect(summary).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(page.getByText("Hide additional evidence")).toBeVisible();
+  });
+
+  test("the disclosure adds no cookies, storage, fetch, XHR, or sendBeacon calls when toggled (P13 Correction 2, C4)", async ({ page, context }) => {
+    // The title previously claimed "no network calls" but only checked
+    // cookies/storage — it never actually observed fetch/XHR/sendBeacon.
+    // Instrumented the same way as the "zero fetch/XHR/sendBeacon on every
+    // route" suite above, so the toggle is genuinely proven silent.
+    const transportCalls: string[] = [];
+    await page.exposeFunction("__recordDisclosureTransport", (call: string) => {
+      transportCalls.push(call);
+    });
+    await page.addInitScript(() => {
+      const record = (label: string) =>
+        (window as unknown as { __recordDisclosureTransport: (call: string) => Promise<void> })
+          .__recordDisclosureTransport(label);
+      const originalFetch = window.fetch;
+      window.fetch = (...args: Parameters<typeof fetch>) => {
+        void record(`fetch:${String(args[0])}`);
+        return originalFetch(...args);
+      };
+      const originalOpen = XMLHttpRequest.prototype.open;
+      XMLHttpRequest.prototype.open = new Proxy(originalOpen, {
+        apply(target, thisArg, args) {
+          void record(`xhr:${String(args[1])}`);
+          return Reflect.apply(target, thisArg, args);
+        },
+      });
+      navigator.sendBeacon = ((url: string | URL) => {
+        void record(`beacon:${String(url)}`);
+        return true;
+      }) as typeof navigator.sendBeacon;
+    });
+
+    await page.goto("/es/proyectos/licendi-ecommerce-brand-experience/");
+    // Reset the count so only calls made by the toggle itself are measured
+    // (page load may legitimately differ from the toggle's own behavior).
+    transportCalls.length = 0;
+
+    const summary = page.locator("summary", { hasText: "Explorar evidencia adicional" });
+    await summary.click();
+
+    expect(transportCalls, `unexpected transport calls from the disclosure toggle: ${JSON.stringify(transportCalls)}`).toEqual([]);
+
+    const cookies = await context.cookies();
+    expect(cookies).toEqual([]);
+    const storage = await page.evaluate(() => ({
+      localStorage: window.localStorage.length,
+      sessionStorage: window.sessionStorage.length,
+    }));
+    expect(storage).toEqual({ localStorage: 0, sessionStorage: 0 });
   });
 });
 

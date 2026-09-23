@@ -100,9 +100,14 @@ describe("AppliedXL — content inventory and bilingual parity", () => {
     }
   });
 
-  it("uses the documented-case verified-evidence status in both locales (Mode A)", () => {
-    expect(c.statusLabel.es).toBe("CASO DOCUMENTADO · EVIDENCIA VERIFICADA");
-    expect(c.statusLabel.en).toBe("DOCUMENTED CASE · VERIFIED EVIDENCE");
+  it("P13 Section 8.2 — all four wireframes are featured by default (the set is already bounded)", () => {
+    expect(c.realEvidence.featuredProductCount).toBe(4);
+    expect(c.realEvidence.productSlides.length).toBe(4);
+  });
+
+  it("uses the authorized-pre-final-evidence status in both locales (Mode A)", () => {
+    expect(c.statusLabel.es).toBe("CASO DOCUMENTADO · EVIDENCIA PREFINAL AUTORIZADA");
+    expect(c.statusLabel.en).toBe("DOCUMENTED CASE · AUTHORIZED PRE-FINAL EVIDENCE");
   });
 
   it("exposes exactly one internal back-to-work action and no external link (no verifiable public product)", () => {
@@ -111,16 +116,21 @@ describe("AppliedXL — content inventory and bilingual parity", () => {
     expect(c.actions[0]!.internalRouteKey).toBe("work");
   });
 
-  it("keeps the client and product name anonymized as XYZ, with no real client name disclosed", () => {
+  it("identifies AppliedXL as the publicly named engagement, and explains XYZ as the anonymized internal evidence identifier — not a confidential client name (P13, Section 7.2)", () => {
     const serialized = JSON.stringify(c);
     expect(serialized).toMatch(/XYZ/);
-    expect(c.linksBody.es).toMatch(/nombre real se mantiene confidencial/);
-    expect(c.linksBody.en).toMatch(/real name remains confidential/);
+    expect(c.breadcrumbCurrent.es).toMatch(/AppliedXL/);
+    expect(c.title.es).toMatch(/AppliedXL/);
+    // The old, self-contradictory claim ("AppliedXL's real name is anonymized as XYZ")
+    // must not reappear: XYZ only labels the internal product/workstream evidence.
+    expect(serialized).not.toMatch(/nombre real (del producto y del cliente|se mantiene anonimizado)/);
+    expect(c.limitationsBody.es).toMatch(/identificador anonimizado usado dentro de la evidencia de diseño/);
+    expect(c.limitationsBody.en).toMatch(/anonymized identifier used inside the authorized design evidence/);
   });
 
-  it("never claims the screens are the final visual design or real data", () => {
-    expect(c.limitationsBody.es).toMatch(/wireframes con datos de ejemplo ficticios/);
-    expect(c.limitationsBody.en).toMatch(/wireframes with fictional sample data/);
+  it("never claims the screens are the final approved visual design or real data", () => {
+    expect(c.limitationsBody.es).toMatch(/no el diseño visual final aprobado/);
+    expect(c.limitationsBody.en).toMatch(/not the final approved visual design/);
   });
 
   it("never renders a client-facing TODO placeholder or internal gate language", () => {

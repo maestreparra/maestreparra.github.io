@@ -133,6 +133,15 @@ export interface LicendiMeecoRealEvidence {
   brandSlides?: RealEvidenceSlide[];
   productSectionLabel: LocalizedValue;
   productFlows: RealEvidenceProductFlow[];
+  /**
+   * Recruiter-first evidence architecture (P13, Section 8.2): how many
+   * items of each group are visible on first scan before the
+   * EvidenceDisclosure control. The remaining, still-authorized evidence
+   * stays in the DOM behind the disclosure — nothing is deleted.
+   */
+  featuredResearchCount?: number;
+  featuredBrandCount?: number;
+  featuredProductFlowCount: number;
 }
 
 export interface LicendiMeecoCaseContent {
@@ -190,7 +199,7 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
     id: "licendi",
     breadcrumbParent: { es: "Proyectos", en: "Work" },
     breadcrumbCurrent: { es: "Licendi E-commerce & Brand Experience", en: "Licendi E-commerce & Brand Experience" },
-    statusLabel: { es: "CASO DOCUMENTADO · EVIDENCIA VERIFICADA", en: "DOCUMENTED CASE · VERIFIED EVIDENCE" },
+    statusLabel: { es: "CASO DOCUMENTADO · EVIDENCIA PREFINAL AUTORIZADA", en: "DOCUMENTED CASE · AUTHORIZED PRE-FINAL EVIDENCE" },
     eyebrow: { es: "Caso de estudio · E-commerce y marca", en: "Case study · E-commerce and brand" },
     title: {
       es: "Licendi: conectar la arquitectura del e-commerce con una marca más clara y confiable.",
@@ -260,13 +269,16 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
       },
     ],
     evidenceSectionLabel: SHARED_LABELS.evidenceSectionLabel,
-    evidenceTitle: { es: "Evidencia real autorizada por la agencia del proyecto", en: "Real evidence authorized by the project's agency" },
+    evidenceTitle: { es: "Evidencia prefinal autorizada por la agencia del proyecto", en: "Authorized pre-final evidence from the project's agency" },
     evidenceIntro: {
-      es: "La agencia de marketing y branding que contrató este proyecto autorizó reproducir en este portafolio las interfaces del sitio, el material del estudio UX/UI y el sistema de marca desarrollados para Licendi. Las capturas provienen directamente de los archivos de diseño del proyecto.",
-      en: "The marketing and branding agency that commissioned this project authorized reproducing the site interfaces, UX/UI study material, and brand system developed for Licendi in this portfolio. The screens are taken directly from the project's design files.",
+      es: "La agencia de marketing y branding que contrató este proyecto autorizó reproducir en este portafolio iteraciones prefinales de las interfaces del sitio, el material del estudio UX/UI y el sistema de marca desarrollados para Licendi. Las capturas provienen directamente de los archivos de diseño del proyecto y no representan la entrega final aprobada por el cliente.",
+      en: "The marketing and branding agency that commissioned this project authorized reproducing pre-final iterations of the site interfaces, UX/UI study material, and brand system developed for Licendi in this portfolio. The screens are taken directly from the project's design files and do not represent the client's final approved delivery.",
     },
     diagrams: [],
     realEvidence: {
+      featuredResearchCount: 1,
+      featuredBrandCount: 2,
+      featuredProductFlowCount: 2,
       researchSectionLabel: { es: "Investigación y auditoría UX/UI", en: "Research and UX/UI audit" },
       researchSlides: [
         {
@@ -282,8 +294,8 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
             en: "The starting point of the UX/UI audit.",
           },
           provenance: { es: "FIGMA · PROYECTO LICENDI · USO AUTORIZADO", en: "FIGMA · LICENDI PROJECT · AUTHORIZED USE" },
-          width: 1920,
-          height: 1080,
+          width: 1000,
+          height: 562,
         },
         {
           id: "L-R2",
@@ -298,8 +310,8 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
             en: "Executive summary that guided the redesign.",
           },
           provenance: { es: "FIGMA · PROYECTO LICENDI · USO AUTORIZADO", en: "FIGMA · LICENDI PROJECT · AUTHORIZED USE" },
-          width: 1920,
-          height: 1080,
+          width: 1000,
+          height: 562,
         },
       ],
       brandSectionLabel: { es: "Sistema de marca (rebranding)", en: "Brand system (rebranding)" },
@@ -317,8 +329,8 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
             en: "Result of the rebranding process.",
           },
           provenance: { es: "FIGMA · BRAND BOOK LICENDI · USO AUTORIZADO", en: "FIGMA · LICENDI BRAND BOOK · AUTHORIZED USE" },
-          width: 1920,
-          height: 1080,
+          width: 1000,
+          height: 562,
         },
         {
           id: "L-B2",
@@ -333,8 +345,8 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
             en: "Exact production-ready values.",
           },
           provenance: { es: "FIGMA · BRAND BOOK LICENDI · USO AUTORIZADO", en: "FIGMA · LICENDI BRAND BOOK · AUTHORIZED USE" },
-          width: 1920,
-          height: 1080,
+          width: 1000,
+          height: 562,
         },
         {
           id: "L-B3",
@@ -349,8 +361,8 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
             en: "The brand's complete typographic system.",
           },
           provenance: { es: "FIGMA · BRAND BOOK LICENDI · USO AUTORIZADO", en: "FIGMA · LICENDI BRAND BOOK · AUTHORIZED USE" },
-          width: 1920,
-          height: 1080,
+          width: 1000,
+          height: 562,
         },
       ],
       productSectionLabel: { es: "Producto: e-commerce responsive", en: "Product: responsive e-commerce" },
@@ -363,16 +375,16 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
             alt: { es: "Página de inicio de Licendi en mobile con banner promocional, productos destacados y categorías.", en: "Licendi mobile homepage with the promotional banner, featured products, and categories." },
             caption: { es: "Mobile", en: "Mobile" },
             provenance: { es: "FIGMA · LICENDI · AUTORIZADO", en: "FIGMA · LICENDI · AUTHORIZED" },
-            width: 390,
-            height: 3929,
+            width: 340,
+            height: 3425,
           },
           desktop: {
             src: "/images/case-studies/licendi/licendi-desktop-landing.webp",
             alt: { es: "Página de inicio de Licendi en desktop con banner promocional, productos destacados, proceso de compra y categorías.", en: "Licendi desktop homepage with the promotional banner, featured products, purchase process, and categories." },
             caption: { es: "Desktop", en: "Desktop" },
             provenance: { es: "FUENTE · FIGMA PROYECTO LICENDI · USO AUTORIZADO", en: "SOURCE · FIGMA LICENDI PROJECT · AUTHORIZED USE" },
-            width: 1920,
-            height: 6126,
+            width: 700,
+            height: 2233,
           },
           note: {
             title: { es: "Home / landing", en: "Home / landing" },
@@ -387,16 +399,16 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
             alt: { es: "Página de categoría en mobile con filtros de precio, categoría y sistema operativo, y una cuadrícula de productos.", en: "Mobile category page with price, category, and operating-system filters, and a product grid." },
             caption: { es: "Mobile", en: "Mobile" },
             provenance: { es: "FIGMA · LICENDI · AUTORIZADO", en: "FIGMA · LICENDI · AUTHORIZED" },
-            width: 390,
-            height: 4320,
+            width: 340,
+            height: 3766,
           },
           desktop: {
             src: "/images/case-studies/licendi/licendi-desktop-catalogo.webp",
             alt: { es: "Página de categoría Office 2021 en desktop con filtros de precio, categoría y sistema operativo, y una cuadrícula de productos.", en: "Desktop Office 2021 category page with price, category, and operating-system filters, and a product grid." },
             caption: { es: "Desktop", en: "Desktop" },
             provenance: { es: "FUENTE · FIGMA PROYECTO LICENDI · USO AUTORIZADO", en: "SOURCE · FIGMA LICENDI PROJECT · AUTHORIZED USE" },
-            width: 1920,
-            height: 2721,
+            width: 700,
+            height: 992,
           },
           note: {
             title: { es: "Catálogo y categorías", en: "Catalog and categories" },
@@ -411,16 +423,16 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
             alt: { es: "Página de detalle de producto en mobile con selector de plataforma, versión, entrega y cantidad.", en: "Mobile product detail page with platform, version, delivery, and quantity selectors." },
             caption: { es: "Mobile", en: "Mobile" },
             provenance: { es: "FIGMA · LICENDI · AUTORIZADO", en: "FIGMA · LICENDI · AUTHORIZED" },
-            width: 390,
-            height: 4098,
+            width: 340,
+            height: 3572,
           },
           desktop: {
             src: "/images/case-studies/licendi/licendi-desktop-producto.webp",
             alt: { es: "Página de detalle de producto de Office Professional Plus 2021 en desktop con selector de plataforma, versión, entrega y cantidad.", en: "Desktop Office Professional Plus 2021 product detail page with platform, version, delivery, and quantity selectors." },
             caption: { es: "Desktop", en: "Desktop" },
             provenance: { es: "FUENTE · FIGMA PROYECTO LICENDI · USO AUTORIZADO", en: "SOURCE · FIGMA LICENDI PROJECT · AUTHORIZED USE" },
-            width: 1920,
-            height: 3479,
+            width: 700,
+            height: 1268,
           },
           note: {
             title: { es: "Detalle de producto", en: "Product detail" },
@@ -435,16 +447,16 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
             alt: { es: "Carrito de compra en mobile con artículos, selector de unidades y precio total.", en: "Mobile shopping cart with items, a quantity selector, and the total price." },
             caption: { es: "Mobile", en: "Mobile" },
             provenance: { es: "FIGMA · LICENDI · AUTORIZADO", en: "FIGMA · LICENDI · AUTHORIZED" },
-            width: 390,
-            height: 2882,
+            width: 340,
+            height: 2512,
           },
           desktop: {
             src: "/images/case-studies/licendi/licendi-desktop-carrito.webp",
             alt: { es: "Carrito de compra en desktop con dos artículos, selector de unidades y precio total.", en: "Desktop shopping cart with two items, a quantity selector, and the total price." },
             caption: { es: "Desktop", en: "Desktop" },
             provenance: { es: "FUENTE · FIGMA PROYECTO LICENDI · USO AUTORIZADO", en: "SOURCE · FIGMA LICENDI PROJECT · AUTHORIZED USE" },
-            width: 1920,
-            height: 2646,
+            width: 700,
+            height: 964,
           },
           note: {
             title: { es: "Carrito de compra", en: "Shopping cart" },
@@ -459,16 +471,16 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
             alt: { es: "Resumen de pedido en mobile durante el checkout, con el precio total y el botón para finalizar la compra.", en: "Mobile order summary during checkout, with the total price and the button to complete the purchase." },
             caption: { es: "Mobile", en: "Mobile" },
             provenance: { es: "FIGMA · LICENDI · AUTORIZADO", en: "FIGMA · LICENDI · AUTHORIZED" },
-            width: 390,
-            height: 2457,
+            width: 340,
+            height: 2142,
           },
           desktop: {
             src: "/images/case-studies/licendi/licendi-desktop-checkout.webp",
             alt: { es: "Resumen de pedido en desktop durante el checkout, con el precio total y el botón para finalizar la compra.", en: "Desktop order summary during checkout, with the total price and the button to complete the purchase." },
             caption: { es: "Desktop", en: "Desktop" },
             provenance: { es: "FUENTE · FIGMA PROYECTO LICENDI · USO AUTORIZADO", en: "SOURCE · FIGMA LICENDI PROJECT · AUTHORIZED USE" },
-            width: 1920,
-            height: 1741,
+            width: 700,
+            height: 634,
           },
           note: {
             title: { es: "Checkout / pago", en: "Checkout / payment" },
@@ -492,8 +504,8 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
     },
     limitationsTitle: SHARED_LABELS.limitationsTitle,
     limitationsBody: {
-      es: "No se publican métricas de conversión, ventas, tráfico ni engagement. Este caso no afirma implementación del código de producción, cumplimiento de accesibilidad ni propiedad sobre la experiencia actual. Licendi ha evolucionado después de mi participación; varios fundamentos estructurales y visuales continúan siendo reconocibles, pero el website actual representa trabajo posterior de sus equipos.",
-      en: "No conversion, sales, traffic, or engagement metrics are published. This case does not claim production-code implementation, accessibility compliance, or ownership of the current experience. Licendi has evolved since my involvement; several structural and visual foundations remain recognizable, while the current website reflects later work by its teams.",
+      es: "No se publican métricas de conversión, ventas, tráfico ni engagement. Las imágenes mostradas corresponden a iteraciones prefinales autorizadas para publicación en el portafolio; no reproducen la entrega final aprobada por el cliente. Este caso no afirma implementación del código de producción, cumplimiento de accesibilidad ni propiedad sobre la experiencia actual. El producto actual puede haber evolucionado después de mi participación; el website vigente representa trabajo posterior de sus equipos.",
+      en: "No conversion, sales, traffic, or engagement metrics are published. The images shown are authorized pre-final iterations for portfolio publication; they do not reproduce the client's final approved delivery. This case does not claim production-code implementation, accessibility compliance, or ownership of the current experience. The current product may have evolved after my involvement; the live website reflects later work by its teams.",
     },
     linksTitle: { es: "Referencias y trabajo relacionado", en: "References and related work" },
     linksBody: {
@@ -506,15 +518,15 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
       { label: { es: "Volver a proyectos", en: "Back to Work" }, variant: "secondary", external: false, internalRouteKey: "work" },
     ],
     disclosure: {
-      es: "Trabajo de diseño realizado durante una colaboración profesional. Las marcas, contenidos y activos de terceros pertenecen a sus respectivos propietarios. Las capturas de interfaz, del estudio UX/UI y del sistema de marca se reproducen con autorización de la agencia de marketing y branding que contrató este proyecto.",
-      en: "Design work completed during a professional engagement. Trademarks, content, and third-party assets belong to their respective owners. Interface screens, UX/UI study material, and brand-system assets are reproduced with authorization from the marketing and branding agency that commissioned this project.",
+      es: "Trabajo de diseño realizado durante una colaboración profesional. Las imágenes mostradas corresponden a iteraciones prefinales autorizadas para publicación en el portafolio; no reproducen la entrega final aprobada por el cliente. Las marcas, contenidos, fotografías y activos de terceros pertenecen a sus respectivos propietarios. El producto actual puede haber evolucionado después de mi participación.",
+      en: "Design work completed during a professional engagement. The images shown are authorized pre-final iterations for portfolio publication; they do not reproduce the client's final approved delivery. Trademarks, content, photography, and third-party assets belong to their respective owners. The current product may have evolved after my involvement.",
     },
   },
   meeco: {
     id: "meeco",
     breadcrumbParent: { es: "Proyectos", en: "Work" },
     breadcrumbCurrent: { es: "MEECO Renewable Energy Website", en: "MEECO Renewable Energy Website" },
-    statusLabel: { es: "CASO DOCUMENTADO · EVIDENCIA VERIFICADA", en: "DOCUMENTED CASE · VERIFIED EVIDENCE" },
+    statusLabel: { es: "CASO DOCUMENTADO · EVIDENCIA PREFINAL AUTORIZADA", en: "DOCUMENTED CASE · AUTHORIZED PRE-FINAL EVIDENCE" },
     eyebrow: { es: "Caso de estudio · Website corporativo", en: "Case study · Corporate website" },
     title: {
       es: "MEECO: organizar una oferta energética internacional en una experiencia corporativa clara.",
@@ -581,13 +593,14 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
       },
     ],
     evidenceSectionLabel: SHARED_LABELS.evidenceSectionLabel,
-    evidenceTitle: { es: "Evidencia real autorizada por la agencia del proyecto", en: "Real evidence authorized by the project's agency" },
+    evidenceTitle: { es: "Evidencia prefinal autorizada por la agencia del proyecto", en: "Authorized pre-final evidence from the project's agency" },
     evidenceIntro: {
-      es: "La agencia de marketing y branding que contrató este proyecto autorizó reproducir en este portafolio las interfaces del sitio desarrolladas para MEECO. Las capturas provienen directamente de los archivos de diseño del proyecto.",
-      en: "The marketing and branding agency that commissioned this project authorized reproducing the site interfaces developed for MEECO in this portfolio. The screens are taken directly from the project's design files.",
+      es: "La agencia de marketing y branding que contrató este proyecto autorizó reproducir en este portafolio iteraciones prefinales de las interfaces del sitio desarrolladas para MEECO. Las capturas provienen directamente de los archivos de diseño del proyecto y no representan la entrega final aprobada por el cliente.",
+      en: "The marketing and branding agency that commissioned this project authorized reproducing pre-final iterations of the site interfaces developed for MEECO in this portfolio. The screens are taken directly from the project's design files and do not represent the client's final approved delivery.",
     },
     diagrams: [],
     realEvidence: {
+      featuredProductFlowCount: 2,
       productSectionLabel: { es: "Producto: website corporativo responsive", en: "Product: responsive corporate website" },
       productFlows: [
         {
@@ -598,16 +611,16 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
             alt: { es: "Página de inicio de MEECO en mobile con hero de energía solar, propuesta de valor y accesos a productos, servicios e inversión.", en: "MEECO mobile homepage with a solar-energy hero, value proposition, and links to products, services, and investment." },
             caption: { es: "Mobile", en: "Mobile" },
             provenance: { es: "FIGMA · MEECO · AUTORIZADO", en: "FIGMA · MEECO · AUTHORIZED" },
-            width: 375,
-            height: 10097,
+            width: 340,
+            height: 9154,
           },
           desktop: {
             src: "/images/case-studies/meeco/meeco-desktop-home.webp",
             alt: { es: "Página de inicio de MEECO en desktop con hero de energía solar, propuesta de valor, accesos a productos, servicios, inversión, testimonios y noticias.", en: "MEECO desktop homepage with a solar-energy hero, value proposition, links to products, services, and investment, testimonials, and news." },
             caption: { es: "Desktop", en: "Desktop" },
             provenance: { es: "FUENTE · FIGMA PROYECTO MEECO · USO AUTORIZADO", en: "SOURCE · FIGMA MEECO PROJECT · AUTHORIZED USE" },
-            width: 1920,
-            height: 5627,
+            width: 700,
+            height: 2051,
           },
           note: {
             title: { es: "Home", en: "Home" },
@@ -622,16 +635,16 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
             alt: { es: "Página de productos en mobile organizada por producción solar, almacenamiento energético, soluciones Hydro y otros productos.", en: "Mobile products page organized by solar production, energy storage, Hydro solutions, and other products." },
             caption: { es: "Mobile", en: "Mobile" },
             provenance: { es: "FIGMA · MEECO · AUTORIZADO", en: "FIGMA · MEECO · AUTHORIZED" },
-            width: 375,
-            height: 11584,
+            width: 340,
+            height: 10503,
           },
           desktop: {
             src: "/images/case-studies/meeco/meeco-desktop-productos.webp",
             alt: { es: "Página de productos en desktop organizada por producción solar, almacenamiento energético, soluciones Hydro y otros productos.", en: "Desktop products page organized by solar production, energy storage, Hydro solutions, and other products." },
             caption: { es: "Desktop", en: "Desktop" },
             provenance: { es: "FUENTE · FIGMA PROYECTO MEECO · USO AUTORIZADO", en: "SOURCE · FIGMA MEECO PROJECT · AUTHORIZED USE" },
-            width: 1920,
-            height: 5324,
+            width: 700,
+            height: 1941,
           },
           note: {
             title: { es: "Productos", en: "Products" },
@@ -646,16 +659,16 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
             alt: { es: "Página de servicios en mobile con consultoría estratégica, plan de financiación, gestión de proyecto, implementación, operación y monitorización.", en: "Mobile services page with strategic consulting, financing plan, project management, implementation, operation, and monitoring." },
             caption: { es: "Mobile", en: "Mobile" },
             provenance: { es: "FIGMA · MEECO · AUTORIZADO", en: "FIGMA · MEECO · AUTHORIZED" },
-            width: 375,
-            height: 9195,
+            width: 340,
+            height: 8336,
           },
           desktop: {
             src: "/images/case-studies/meeco/meeco-desktop-servicios.webp",
             alt: { es: "Página de servicios en desktop con consultoría estratégica, plan de financiación, gestión de proyecto, implementación, operación y monitorización.", en: "Desktop services page with strategic consulting, financing plan, project management, implementation, operation, and monitoring." },
             caption: { es: "Desktop", en: "Desktop" },
             provenance: { es: "FUENTE · FIGMA PROYECTO MEECO · USO AUTORIZADO", en: "SOURCE · FIGMA MEECO PROJECT · AUTHORIZED USE" },
-            width: 1920,
-            height: 4397,
+            width: 700,
+            height: 1603,
           },
           note: {
             title: { es: "Servicios", en: "Services" },
@@ -670,16 +683,16 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
             alt: { es: "Página de inversión ecológica en mobile con beneficios de invertir en energía limpia y noticias sobre inversiones.", en: "Mobile green-investment page with the benefits of investing in clean energy and investment-related news." },
             caption: { es: "Mobile", en: "Mobile" },
             provenance: { es: "FIGMA · MEECO · AUTORIZADO", en: "FIGMA · MEECO · AUTHORIZED" },
-            width: 375,
-            height: 8431,
+            width: 340,
+            height: 7644,
           },
           desktop: {
             src: "/images/case-studies/meeco/meeco-desktop-inversion.webp",
             alt: { es: "Página de inversión ecológica en desktop con beneficios de invertir en energía limpia y noticias sobre inversiones.", en: "Desktop green-investment page with the benefits of investing in clean energy and investment-related news." },
             caption: { es: "Desktop", en: "Desktop" },
             provenance: { es: "FUENTE · FIGMA PROYECTO MEECO · USO AUTORIZADO", en: "SOURCE · FIGMA MEECO PROJECT · AUTHORIZED USE" },
-            width: 1920,
-            height: 4466,
+            width: 700,
+            height: 1628,
           },
           note: {
             title: { es: "Inversión", en: "Investment" },
@@ -694,16 +707,16 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
             alt: { es: "Página de la compañía en mobile mostrando el alcance global de MEECO mediante una lista de países.", en: "Mobile company page showing MEECO's global reach through a list of countries." },
             caption: { es: "Mobile", en: "Mobile" },
             provenance: { es: "FIGMA · MEECO · AUTORIZADO", en: "FIGMA · MEECO · AUTHORIZED" },
-            width: 375,
-            height: 9964,
+            width: 340,
+            height: 9034,
           },
           desktop: {
             src: "/images/case-studies/meeco/meeco-desktop-empresa.webp",
             alt: { es: "Página de la compañía en desktop mostrando el alcance global de MEECO y su estructura corporativa por país.", en: "Desktop company page showing MEECO's global reach and its per-country corporate structure." },
             caption: { es: "Desktop", en: "Desktop" },
             provenance: { es: "FUENTE · FIGMA PROYECTO MEECO · USO AUTORIZADO", en: "SOURCE · FIGMA MEECO PROJECT · AUTHORIZED USE" },
-            width: 1920,
-            height: 3376,
+            width: 700,
+            height: 1231,
           },
           note: {
             title: { es: "Compañía", en: "Company" },
@@ -727,8 +740,8 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
     },
     limitationsTitle: SHARED_LABELS.limitationsTitle,
     limitationsBody: {
-      es: "No se publican métricas comerciales, resultados de tráfico ni certificaciones técnicas. El caso no afirma implementación del código de producción ni propiedad sobre cambios posteriores. La experiencia pública actual ha evolucionado; este documento se limita al alcance y a las decisiones de diseño respaldadas por la evidencia disponible.",
-      en: "No commercial metrics, traffic outcomes, or technical certifications are published. The case does not claim production-code implementation or ownership of subsequent changes. The current public experience has evolved; this document is limited to the scope and design decisions supported by the available evidence.",
+      es: "No se publican métricas comerciales, resultados de tráfico ni certificaciones técnicas. Las imágenes mostradas corresponden a iteraciones prefinales autorizadas para publicación en el portafolio; no reproducen la entrega final aprobada por el cliente. El caso no afirma implementación del código de producción ni propiedad sobre cambios posteriores. El producto actual puede haber evolucionado después de mi participación; este documento se limita al alcance y a las decisiones de diseño respaldadas por la evidencia disponible.",
+      en: "No commercial metrics, traffic outcomes, or technical certifications are published. The images shown are authorized pre-final iterations for portfolio publication; they do not reproduce the client's final approved delivery. The case does not claim production-code implementation or ownership of subsequent changes. The current product may have evolved after my involvement; this document is limited to the scope and design decisions supported by the available evidence.",
     },
     linksTitle: { es: "Referencias y trabajo relacionado", en: "References and related work" },
     linksBody: {
@@ -741,8 +754,8 @@ export const licendiMeecoCaseStudies: Record<LicendiMeecoCaseId, LicendiMeecoCas
       { label: { es: "Volver a proyectos", en: "Back to Work" }, variant: "secondary", external: false, internalRouteKey: "work" },
     ],
     disclosure: {
-      es: "Trabajo de diseño realizado durante una colaboración profesional. Las marcas, contenidos y activos de terceros pertenecen a sus respectivos propietarios. Las capturas de interfaz se reproducen con autorización de la agencia de marketing y branding que contrató este proyecto. Este caso no afirma que Licendi y meeco Group sean la misma corporación legal ni que una empresa sea propietaria legal de la otra; documenta únicamente el contexto de colaboración profesional compartido.",
-      en: "Design work completed during a professional engagement. Trademarks, content, and third-party assets belong to their respective owners. Interface screens are reproduced with authorization from the marketing and branding agency that commissioned this project. This case does not claim that Licendi and the meeco Group are the same legal corporation or that one company legally owns the other; it documents only the shared professional-collaboration context.",
+      es: "Trabajo de diseño realizado durante una colaboración profesional. Las imágenes mostradas corresponden a iteraciones prefinales autorizadas para publicación en el portafolio; no reproducen la entrega final aprobada por el cliente. Las marcas, contenidos, fotografías y activos de terceros pertenecen a sus respectivos propietarios. El producto actual puede haber evolucionado después de mi participación. Este caso no afirma que Licendi y meeco Group sean la misma corporación legal ni que una empresa sea propietaria legal de la otra; documenta únicamente el contexto de colaboración profesional compartido.",
+      en: "Design work completed during a professional engagement. The images shown are authorized pre-final iterations for portfolio publication; they do not reproduce the client's final approved delivery. Trademarks, content, photography, and third-party assets belong to their respective owners. The current product may have evolved after my involvement. This case does not claim that Licendi and the meeco Group are the same legal corporation or that one company legally owns the other; it documents only the shared professional-collaboration context.",
     },
   },
 };

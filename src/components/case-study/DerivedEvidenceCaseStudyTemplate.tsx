@@ -18,6 +18,7 @@ import { ExternalLinkGroup } from "@/components/ui/ExternalLinkGroup";
 import { DiagramFigureShell } from "@/components/ui/DiagramFigureShell";
 import { RealEvidenceImage } from "@/components/ui/RealEvidenceImage";
 import { RealEvidenceProductFlowCard } from "@/components/ui/RealEvidenceProductFlowCard";
+import { EvidenceDisclosure } from "@/components/ui/EvidenceDisclosure";
 import { StageSequenceDiagram } from "@/components/ui/StageSequenceDiagram";
 import { DomainTreeDiagram } from "@/components/ui/DomainTreeDiagram";
 import { TaxonomyColumnsDiagram } from "@/components/ui/TaxonomyColumnsDiagram";
@@ -34,6 +35,9 @@ export interface DerivedEvidenceCaseStudyTemplateProps {
 }
 
 const RECONSTRUCTION_LABEL = { es: "RECONSTRUCCIÓN PARA PORTAFOLIO", en: "PORTFOLIO RECONSTRUCTION" } as const;
+
+const DISCLOSURE_COLLAPSED_LABEL = { es: "Explorar evidencia adicional", en: "Explore additional evidence" } as const;
+const DISCLOSURE_EXPANDED_LABEL = { es: "Ocultar evidencia adicional", en: "Hide additional evidence" } as const;
 
 function DiagramBody({ diagram, locale }: { diagram: LicendiMeecoDiagramContent; locale: Locale }) {
   switch (diagram.kind) {
@@ -190,60 +194,79 @@ export function DerivedEvidenceCaseStudyTemplate({ caseId, locale }: DerivedEvid
             <p className={styles.body}>{localize(c.evidenceIntro, locale)}</p>
             {c.realEvidence ? (
               (() => {
-                const researchSlides = c.realEvidence.researchSlides ?? [];
-                const brandSlides = c.realEvidence.brandSlides ?? [];
-                const totalRealEvidence = researchSlides.length + brandSlides.length + c.realEvidence.productFlows.length;
+                const realEvidence = c.realEvidence;
+                const researchSlides = realEvidence.researchSlides ?? [];
+                const brandSlides = realEvidence.brandSlides ?? [];
+                const productFlows = realEvidence.productFlows;
+                const totalRealEvidence = researchSlides.length + brandSlides.length + productFlows.length;
                 let figureIndex = 0;
                 const nextFigureNumber = (id: string) => {
                   figureIndex += 1;
                   return `${id} · ${String(figureIndex).padStart(2, "0")}/${totalRealEvidence}`;
                 };
-                return (
-                  <div className={styles.realEvidenceGroups}>
-                    {researchSlides.length > 0 && c.realEvidence.researchSectionLabel ? (
-                      <div className={styles.realEvidenceGroup}>
-                        <h3 className={styles.subheading}>{localize(c.realEvidence.researchSectionLabel, locale)}</h3>
-                        <div className={styles.slideGrid}>
-                          {researchSlides.map((slide) => (
-                            <RealEvidenceImage
-                              key={slide.id}
-                              figureNumber={nextFigureNumber(slide.id)}
-                              title={localize(slide.title, locale)}
-                              src={slide.src}
-                              alt={localize(slide.alt, locale)}
-                              width={slide.width}
-                              height={slide.height}
-                              caption={localize(slide.caption, locale)}
-                              provenance={localize(slide.provenance, locale)}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    ) : null}
-                    {brandSlides.length > 0 && c.realEvidence.brandSectionLabel ? (
-                      <div className={styles.realEvidenceGroup}>
-                        <h3 className={styles.subheading}>{localize(c.realEvidence.brandSectionLabel, locale)}</h3>
-                        <div className={styles.slideGrid}>
-                          {brandSlides.map((slide) => (
-                            <RealEvidenceImage
-                              key={slide.id}
-                              figureNumber={nextFigureNumber(slide.id)}
-                              title={localize(slide.title, locale)}
-                              src={slide.src}
-                              alt={localize(slide.alt, locale)}
-                              width={slide.width}
-                              height={slide.height}
-                              caption={localize(slide.caption, locale)}
-                              provenance={localize(slide.provenance, locale)}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    ) : null}
+
+                const featuredResearchCount = realEvidence.featuredResearchCount ?? researchSlides.length;
+                const featuredBrandCount = realEvidence.featuredBrandCount ?? brandSlides.length;
+                const featuredFlowCount = realEvidence.featuredProductFlowCount;
+
+                const featuredResearch = researchSlides.slice(0, featuredResearchCount);
+                const restResearch = researchSlides.slice(featuredResearchCount);
+                const featuredBrand = brandSlides.slice(0, featuredBrandCount);
+                const restBrand = brandSlides.slice(featuredBrandCount);
+                const featuredFlows = productFlows.slice(0, featuredFlowCount);
+                const restFlows = productFlows.slice(featuredFlowCount);
+                const hasRest = restResearch.length + restBrand.length + restFlows.length > 0;
+
+                const researchGroup = (slides: typeof researchSlides) =>
+                  slides.length > 0 && realEvidence.researchSectionLabel ? (
                     <div className={styles.realEvidenceGroup}>
-                      <h3 className={styles.subheading}>{localize(c.realEvidence.productSectionLabel, locale)}</h3>
+                      <h3 className={styles.subheading}>{localize(realEvidence.researchSectionLabel, locale)}</h3>
+                      <div className={styles.slideGrid}>
+                        {slides.map((slide) => (
+                          <RealEvidenceImage
+                            key={slide.id}
+                            figureNumber={nextFigureNumber(slide.id)}
+                            title={localize(slide.title, locale)}
+                            src={slide.src}
+                            alt={localize(slide.alt, locale)}
+                            width={slide.width}
+                            height={slide.height}
+                            caption={localize(slide.caption, locale)}
+                            provenance={localize(slide.provenance, locale)}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ) : null;
+
+                const brandGroup = (slides: typeof brandSlides) =>
+                  slides.length > 0 && realEvidence.brandSectionLabel ? (
+                    <div className={styles.realEvidenceGroup}>
+                      <h3 className={styles.subheading}>{localize(realEvidence.brandSectionLabel, locale)}</h3>
+                      <div className={styles.slideGrid}>
+                        {slides.map((slide) => (
+                          <RealEvidenceImage
+                            key={slide.id}
+                            figureNumber={nextFigureNumber(slide.id)}
+                            title={localize(slide.title, locale)}
+                            src={slide.src}
+                            alt={localize(slide.alt, locale)}
+                            width={slide.width}
+                            height={slide.height}
+                            caption={localize(slide.caption, locale)}
+                            provenance={localize(slide.provenance, locale)}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ) : null;
+
+                const flowGroup = (flows: typeof productFlows) =>
+                  flows.length > 0 ? (
+                    <div className={styles.realEvidenceGroup}>
+                      <h3 className={styles.subheading}>{localize(realEvidence.productSectionLabel, locale)}</h3>
                       <div className={styles.productFlowGrid}>
-                        {c.realEvidence.productFlows.map((flow) => (
+                        {flows.map((flow) => (
                           <RealEvidenceProductFlowCard
                             key={flow.id}
                             figureNumber={nextFigureNumber(flow.id)}
@@ -270,6 +293,23 @@ export function DerivedEvidenceCaseStudyTemplate({ caseId, locale }: DerivedEvid
                         ))}
                       </div>
                     </div>
+                  ) : null;
+
+                return (
+                  <div className={styles.realEvidenceGroups}>
+                    {researchGroup(featuredResearch)}
+                    {brandGroup(featuredBrand)}
+                    {flowGroup(featuredFlows)}
+                    {hasRest ? (
+                      <EvidenceDisclosure
+                        collapsedLabel={localize(DISCLOSURE_COLLAPSED_LABEL, locale)}
+                        expandedLabel={localize(DISCLOSURE_EXPANDED_LABEL, locale)}
+                      >
+                        {researchGroup(restResearch)}
+                        {brandGroup(restBrand)}
+                        {flowGroup(restFlows)}
+                      </EvidenceDisclosure>
+                    ) : null}
                   </div>
                 );
               })()

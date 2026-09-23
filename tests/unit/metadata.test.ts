@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildRouteMetadata } from "@/lib/metadata";
+import { publicRouteKeys } from "@/i18n/routes";
 
 describe("home metadata", () => {
   it("sets the canonical URL to the locale's own home path", () => {
@@ -101,5 +102,50 @@ describe("P7 — Core Pages metadata", () => {
     expect(buildRouteMetadata("about", "es").openGraph).toMatchObject({ type: "profile" });
     expect(buildRouteMetadata("work", "es").openGraph).toMatchObject({ type: "website" });
     expect(buildRouteMetadata("contact", "es").openGraph).toMatchObject({ type: "website" });
+  });
+});
+
+describe("P13 — social sharing metadata (Section 11)", () => {
+  it("every public route emits an absolute-URL Open Graph image and a summary_large_image Twitter card", () => {
+    for (const routeKey of publicRouteKeys) {
+      for (const locale of ["es", "en"] as const) {
+        const metadata = buildRouteMetadata(routeKey, locale);
+        const ogImages = metadata.openGraph && "images" in metadata.openGraph ? metadata.openGraph.images : undefined;
+        expect(Array.isArray(ogImages), `${routeKey} ${locale} openGraph.images`).toBe(true);
+        const image = (ogImages as Array<{ url: string; width?: number; height?: number }>)[0]!;
+        expect(image.url).toMatch(/^https:\/\/maestreparra\.github\.io\/images\/social\/.+\.png$/);
+        expect(image.width).toBe(1200);
+        expect(image.height).toBe(630);
+
+        expect(metadata.twitter).toMatchObject({ card: "summary_large_image" });
+        const twitterImages = metadata.twitter && "images" in metadata.twitter ? metadata.twitter.images : undefined;
+        expect(twitterImages).toEqual([image.url]);
+      }
+    }
+  });
+
+  it("each case study gets its own social card; Home/About/Work/Contact share the default card", () => {
+    const urlFor = (routeKey: (typeof publicRouteKeys)[number]) => {
+      const metadata = buildRouteMetadata(routeKey, "es");
+      const ogImages = metadata.openGraph && "images" in metadata.openGraph ? metadata.openGraph.images : undefined;
+      return (ogImages as Array<{ url: string }>)[0]!.url;
+    };
+
+    const caseStudyKeys = ["vitalink", "bm-envios", "licendi", "meeco", "pilotorb", "appliedxl"] as const;
+    const caseStudyUrls = caseStudyKeys.map(urlFor);
+    expect(new Set(caseStudyUrls).size).toBe(caseStudyKeys.length);
+
+    const sharedUrl = urlFor("home");
+    for (const routeKey of ["about", "work", "contact"] as const) {
+      expect(urlFor(routeKey)).toBe(sharedUrl);
+    }
+  });
+
+  it("does not regress existing canonical/hreflang behavior for any route", () => {
+    for (const routeKey of publicRouteKeys) {
+      const metadata = buildRouteMetadata(routeKey, "es");
+      expect(metadata.alternates?.canonical).toBeTruthy();
+      expect(metadata.alternates?.languages).toBeTruthy();
+    }
   });
 });

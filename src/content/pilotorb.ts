@@ -79,6 +79,7 @@ export const pilotorbCaseContent: SingleFlowCaseContent = {
     en: "PilotOrb's founders authorized reproducing screens from the final design developed during the engagement in this portfolio. The screens are taken directly from the project's Figma design files; they are not screenshots of a production product and include no real customer data.",
   },
   realEvidence: {
+    featuredProductCount: 2,
     brandSectionLabel: { es: "Identidad de producto", en: "Product identity" },
     brandSlides: [
       {

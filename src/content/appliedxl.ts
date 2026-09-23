@@ -3,7 +3,7 @@ import type { SingleFlowCaseContent } from "./single-flow-case";
 export const appliedxlCaseContent: SingleFlowCaseContent = {
   breadcrumbParent: { es: "Proyectos", en: "Work" },
   breadcrumbCurrent: { es: "AppliedXL AI & Data Platform", en: "AppliedXL AI & Data Platform" },
-  statusLabel: { es: "CASO DOCUMENTADO · EVIDENCIA VERIFICADA", en: "DOCUMENTED CASE · VERIFIED EVIDENCE" },
+  statusLabel: { es: "CASO DOCUMENTADO · EVIDENCIA PREFINAL AUTORIZADA", en: "DOCUMENTED CASE · AUTHORIZED PRE-FINAL EVIDENCE" },
   eyebrow: { es: "Caso de estudio · IA y datos", en: "Case study · AI and data" },
   title: {
     es: "AppliedXL: hacer explorable una plataforma de datos científicos con IA.",
@@ -73,12 +73,13 @@ export const appliedxlCaseContent: SingleFlowCaseContent = {
     },
   ],
   evidenceSectionLabel: { es: "EVIDENCIA DEL PROCESO", en: "PROCESS EVIDENCE" },
-  evidenceTitle: { es: "Evidencia real autorizada, anonimizada como \"XYZ\"", en: "Real evidence, authorized and anonymized as \"XYZ\"" },
+  evidenceTitle: { es: "Evidencia prefinal autorizada por AppliedXL", en: "Authorized pre-final evidence from AppliedXL" },
   evidenceIntro: {
-    es: "El archivo de diseño de este proyecto reemplaza el nombre real del producto y del cliente por el código \"XYZ\" por confidencialidad. Las pantallas mostradas son wireframes de la etapa de definición, con datos de ejemplo ficticios (no información científica, clínica o financiera real), tomados directamente de los archivos de diseño del proyecto en Figma.",
-    en: "This project's design file replaces the product's and client's real names with the code \"XYZ\" for confidentiality. The screens shown are definition-stage wireframes with fictional sample data (no real scientific, clinical, or financial information), taken directly from the project's Figma design files.",
+    es: "AppliedXL autorizó documentar este engagement públicamente. Dentro de los archivos de diseño autorizados, el producto/workstream interno y su contenido de ejemplo se identifican con el código \"XYZ\" por confidencialidad. Las pantallas mostradas son wireframes o iteraciones prefinales de la etapa de definición, no la entrega final aprobada ni capturas de un producto en producción, y no contienen información científica, clínica o financiera real.",
+    en: "AppliedXL authorized documenting this engagement publicly. Within the authorized design files, the internal product/workstream and its example content are identified with the code \"XYZ\" for confidentiality. The screens shown are wireframes or pre-final iterations from the definition stage, not the final approved delivery or screenshots of a production product, and contain no real scientific, clinical, or financial information.",
   },
   realEvidence: {
+    featuredProductCount: 4,
     productSectionLabel: { es: "Producto: plataforma de IA y datos científicos", en: "Product: AI and scientific-data platform" },
     productSlides: [
       {
@@ -162,19 +163,19 @@ export const appliedxlCaseContent: SingleFlowCaseContent = {
   },
   limitationsTitle: { es: "Límites declarados", en: "Declared limitations" },
   limitationsBody: {
-    es: "El nombre real del producto y del cliente se mantiene anonimizado como \"XYZ\" por confidencialidad, siguiendo el mismo criterio del archivo de diseño original. Las pantallas mostradas son wireframes con datos de ejemplo ficticios, no el diseño visual final ni información científica, clínica o financiera real. Mi participación se limitó a la etapa de discovery y diseño entre enero y marzo de 2024; la plataforma ha continuado evolucionando posteriormente y este caso no afirma que el producto actual conserve este mismo diseño.",
-    en: "The product's and client's real names remain anonymized as \"XYZ\" for confidentiality, following the same convention used in the original design file. The screens shown are wireframes with fictional sample data, not the final visual design or real scientific, clinical, or financial information. My involvement was limited to the discovery and design stage between January and March 2024; the platform has continued evolving since, and this case does not claim the current product retains this same design.",
+    es: "AppliedXL es el engagement identificado públicamente en este caso; \"XYZ\" es únicamente el identificador anonimizado usado dentro de la evidencia de diseño autorizada para el producto/workstream interno y su contenido de ejemplo, siguiendo el mismo criterio del archivo de diseño original. Las pantallas mostradas son wireframes o iteraciones prefinales, no el diseño visual final aprobado ni información científica, clínica o financiera real. Mi participación se limitó a la etapa de discovery y diseño entre enero y marzo de 2024; el producto actual puede haber evolucionado y este caso no afirma que conserve este mismo diseño.",
+    en: "AppliedXL is the publicly identified engagement in this case; \"XYZ\" is only the anonymized identifier used inside the authorized design evidence for the internal product/workstream and its example content, following the same convention used in the original design file. The screens shown are wireframes or pre-final iterations, not the final approved visual design or real scientific, clinical, or financial information. My involvement was limited to the discovery and design stage between January and March 2024; the current product may have evolved, and this case does not claim it retains this same design.",
   },
   linksTitle: { es: "Sobre esta evidencia", en: "About this evidence" },
   linksBody: {
-    es: "AppliedXL es un producto privado sin sitio de referencia público verificable, y su nombre real se mantiene confidencial en este caso. Por eso este caso no enlaza a un website externo.",
-    en: "AppliedXL is a private product with no verifiable public reference site, and its real name remains confidential in this case. For that reason, this case does not link to an external website.",
+    es: "AppliedXL es un producto privado sin sitio de referencia público verificable. Por eso este caso no enlaza a un website externo.",
+    en: "AppliedXL is a private product with no verifiable public reference site. For that reason, this case does not link to an external website.",
   },
   actions: [
     { label: { es: "Volver a proyectos", en: "Back to Work" }, variant: "secondary", external: false, internalRouteKey: "work" },
   ],
   disclosure: {
-    es: "Trabajo de diseño realizado durante una consultoría profesional independiente para AppliedXL, cuyo nombre y evidencia visual se presentan anonimizados como \"XYZ\" siguiendo el mismo criterio de confidencialidad del archivo de diseño original. Las pantallas mostradas son wireframes con datos ficticios, no capturas de un producto en producción con datos reales.",
-    en: "Design work completed during an independent professional consulting engagement for AppliedXL, whose name and visual evidence are presented anonymized as \"XYZ\" following the same confidentiality convention used in the original design file. The screens shown are wireframes with fictional data, not screenshots of a production product with real data.",
+    es: "Trabajo de diseño realizado durante una consultoría profesional independiente para AppliedXL, quien autorizó documentar este engagement públicamente. Las imágenes mostradas corresponden a iteraciones prefinales autorizadas para publicación en el portafolio; no reproducen la entrega final aprobada. Dentro de esa evidencia, el producto/workstream interno y su contenido de ejemplo se identifican como \"XYZ\" por confidencialidad, siguiendo el mismo criterio del archivo de diseño original. Las marcas, contenidos y activos de terceros pertenecen a sus respectivos propietarios. El producto actual puede haber evolucionado después de mi participación.",
+    en: "Design work completed during an independent professional consulting engagement for AppliedXL, who authorized documenting this engagement publicly. The images shown are authorized pre-final iterations for portfolio publication; they do not reproduce the final approved delivery. Within that evidence, the internal product/workstream and its example content are identified as \"XYZ\" for confidentiality, following the same convention used in the original design file. Trademarks, content, and third-party assets belong to their respective owners. The current product may have evolved after my involvement.",
   },
 };
