@@ -114,7 +114,6 @@ export function CaseStudyTemplate({ caseId, locale }: CaseStudyTemplateProps) {
               eyebrowMobile={eyebrowMobile !== eyebrowDesktop ? eyebrowMobile : undefined}
               titleMobile={titleMobile !== titleDesktop ? titleMobile : undefined}
               introductionMobile={introMobile !== introDesktop ? introMobile : undefined}
-              reserveMobileHeight
             />
             <div className={styles.snapshot}>
               <p className={styles.snapshotLabel}>{localize(c.roleLabel, locale)}</p>

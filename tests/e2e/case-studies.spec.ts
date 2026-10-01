@@ -365,15 +365,43 @@ test.describe("P9-QA — locale switching preserves query and fragment on Case S
   }
 });
 
-test.describe("P9 Correction Attempt 2 (QA-01) — page height within ±5% of the frozen Figma frame at 390px and 1440px", () => {
+test.describe("mobile case-study introduction cards use content-driven height", () => {
+  const routes = [
+    "/es/proyectos/vitalink-digital-ecosystem/",
+    "/en/work/vitalink-digital-ecosystem/",
+    "/es/proyectos/bm-envios-digital-experience/",
+    "/en/work/bm-envios-digital-experience/",
+  ] as const;
+
+  for (const route of routes) {
+    test(`${route} does not exceed the natural AppliedXL introduction-card height`, async ({ page }) => {
+      await page.setViewportSize({ width: 390, height: 900 });
+      await page.goto("/es/proyectos/appliedxl-ai-data-platform/");
+      const appliedXlHero = page.locator("main h1").locator("..");
+      const appliedXlHeight = (await appliedXlHero.boundingBox())!.height;
+
+      await page.goto(route);
+      const hero = page.locator("main h1").locator("..");
+      const heroBox = await hero.boundingBox();
+      const introduction = hero.locator("p").last();
+      const introductionBox = await introduction.boundingBox();
+
+      expect(heroBox!.height, `${route} should not exceed AppliedXL's content-driven card`).toBeLessThanOrEqual(
+        appliedXlHeight + 8,
+      );
+      expect(
+        heroBox!.y + heroBox!.height - (introductionBox!.y + introductionBox!.height),
+        `${route} should not reserve empty space below its introduction`,
+      ).toBeLessThanOrEqual(32);
+    });
+  }
+});
+
+test.describe("desktop case-study page height remains within ±5% of the frozen Figma frame", () => {
   const frozenHeights: Array<{ path: string; width: number; figmaHeight: number; node: string }> = [
-    { path: "/es/proyectos/vitalink-digital-ecosystem/", width: 390, figmaHeight: 6088, node: "46:135" },
     { path: "/es/proyectos/vitalink-digital-ecosystem/", width: 1440, figmaHeight: 4592, node: "46:86" },
-    { path: "/en/work/vitalink-digital-ecosystem/", width: 390, figmaHeight: 6114, node: "46:303" },
     { path: "/en/work/vitalink-digital-ecosystem/", width: 1440, figmaHeight: 4544, node: "46:254" },
-    { path: "/es/proyectos/bm-envios-digital-experience/", width: 390, figmaHeight: 6176, node: "46:219" },
     { path: "/es/proyectos/bm-envios-digital-experience/", width: 1440, figmaHeight: 4726, node: "46:170" },
-    { path: "/en/work/bm-envios-digital-experience/", width: 390, figmaHeight: 6118, node: "46:387" },
     { path: "/en/work/bm-envios-digital-experience/", width: 1440, figmaHeight: 4636, node: "46:338" },
   ];
 
