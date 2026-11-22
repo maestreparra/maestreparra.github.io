@@ -131,7 +131,7 @@ describe("P13 — social sharing metadata (Section 11)", () => {
       return (ogImages as Array<{ url: string }>)[0]!.url;
     };
 
-    const caseStudyKeys = ["vitalink", "bm-envios", "licendi", "meeco", "pilotorb", "appliedxl"] as const;
+    const caseStudyKeys = ["vitalink", "bm-envios", "licendi", "meeco", "pilotorb", "appliedxl", "ronald-parra"] as const;
     const caseStudyUrls = caseStudyKeys.map(urlFor);
     expect(new Set(caseStudyUrls).size).toBe(caseStudyKeys.length);
 

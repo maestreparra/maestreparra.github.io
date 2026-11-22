@@ -70,7 +70,7 @@ describe("route-aware locale switch target (buildRouteSwitchHref)", () => {
 });
 
 describe("P9 Architecture Amendment 1 — primary-navigation subset stays typed and separate from detail routes", () => {
-  it("publicRoutes/PublicRouteKey contain exactly the ten approved route keys (adds appliedxl)", () => {
+  it("publicRoutes/PublicRouteKey contain every approved route key", () => {
     const expectedKeys: PublicRouteKey[] = [
       "home",
       "about",
@@ -82,6 +82,7 @@ describe("P9 Architecture Amendment 1 — primary-navigation subset stays typed 
       "meeco",
       "pilotorb",
       "appliedxl",
+      "ronald-parra",
     ];
     expect([...publicRouteKeys].sort()).toEqual([...expectedKeys].sort());
     for (const key of expectedKeys) {
@@ -100,6 +101,7 @@ describe("P9 Architecture Amendment 1 — primary-navigation subset stays typed 
     expect(primaryNavigationRouteKeys).not.toContain("meeco");
     expect(primaryNavigationRouteKeys).not.toContain("pilotorb");
     expect(primaryNavigationRouteKeys).not.toContain("appliedxl");
+    expect(primaryNavigationRouteKeys).not.toContain("ronald-parra");
     expect(primaryNavigationRouteKeys).not.toContain("contact");
   });
 });

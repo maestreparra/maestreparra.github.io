@@ -121,4 +121,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://maestreparra.github.io/en/work/appliedxl-ai-data-platform/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://maestreparra.github.io/es/proyectos/appliedxl-ai-data-platform/" />
   </url>
+  <url>
+    <loc>https://maestreparra.github.io/es/proyectos/ronald-parra-digital-health-ecosystem/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://maestreparra.github.io/es/proyectos/ronald-parra-digital-health-ecosystem/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://maestreparra.github.io/en/work/ronald-parra-digital-health-ecosystem/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maestreparra.github.io/es/proyectos/ronald-parra-digital-health-ecosystem/" />
+  </url>
+  <url>
+    <loc>https://maestreparra.github.io/en/work/ronald-parra-digital-health-ecosystem/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://maestreparra.github.io/es/proyectos/ronald-parra-digital-health-ecosystem/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://maestreparra.github.io/en/work/ronald-parra-digital-health-ecosystem/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maestreparra.github.io/es/proyectos/ronald-parra-digital-health-ecosystem/" />
+  </url>
 </urlset>

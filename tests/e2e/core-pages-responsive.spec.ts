@@ -91,13 +91,17 @@ test.describe("P7-QA-01 — Contact mobile matches the frozen Figma composition 
     // Baseline updated for P5: Work gained the Licendi and MEECO cards,
     // which legitimately grows the page beyond the pre-P5 Figma frame
     // (23:6). Updated again after adding the PilotOrb card, then again
-    // after adding AppliedXL (D-030, sixth card completing the 3x2 grid).
+    // after adding AppliedXL (D-030, sixth card completing the 3x2 grid),
+    // and again for the authorized Ronald Parra case (seventh card).
     // This is the measured post-P5 static-export baseline, not a new Figma
     // cross-check — that remains pending Sol's independent QA.
     await page.setViewportSize({ width: 390, height: 900 });
     await page.goto("/es/proyectos/");
     const workHeight = await page.evaluate(() => document.documentElement.scrollHeight);
-    expect(Math.abs(workHeight - 5043), "Work ES 390px measured baseline after AppliedXL (5043px)").toBeLessThanOrEqual(80);
+    expect(
+      Math.abs(workHeight - 5589),
+      "Work ES 390px measured baseline after the Ronald Parra case (5589px)",
+    ).toBeLessThanOrEqual(80);
 
     // About's own +173px (+3.7%) gap versus Figma pre-dates this correction
     // and About's composition is denylisted this round (out of scope for

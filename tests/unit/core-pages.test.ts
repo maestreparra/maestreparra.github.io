@@ -7,9 +7,9 @@ import { aboutContent, workContent, contactContent } from "@/content/core-pages"
 import { buildAboutStructuredData } from "@/lib/structured-data";
 
 describe("P7/P9 — typed PublicRouteKey parity and exact paths", () => {
-  it("defines exactly home, about, work, contact, vitalink, bm-envios, licendi, meeco, pilotorb, and appliedxl", () => {
+  it("defines every approved core and case-study route", () => {
     expect(publicRouteKeys.sort()).toEqual(
-      ["about", "appliedxl", "bm-envios", "contact", "home", "licendi", "meeco", "pilotorb", "vitalink", "work"].sort(),
+      ["about", "appliedxl", "bm-envios", "contact", "home", "licendi", "meeco", "pilotorb", "ronald-parra", "vitalink", "work"].sort(),
     );
   });
 
@@ -82,8 +82,9 @@ describe("P7 — About capability and experience inventories", () => {
 });
 
 describe("P7 — Work status labels and case inventory", () => {
-  it("orders cards BM Envios, VitaLink, AppliedXL, PilotOrb, Licendi, MEECO, and implies no other employer as a standalone case", () => {
+  it("places the Ronald Parra healthcare ecosystem first and preserves the existing case order", () => {
     expect(workContent.projects.map((project) => project.id)).toEqual([
+      "ronald-parra",
       "bm-envios",
       "vitalink",
       "appliedxl",
@@ -213,7 +214,7 @@ describe("P7 — About-only structured data", () => {
 describe("P7/P9 — sitemap inventory", () => {
   const sitemap = readFileSync(path.resolve(process.cwd(), "public/sitemap.xml"), "utf8");
 
-  it("contains exactly the twenty localized Home/Core Pages/Case Study URLs (adds AppliedXL)", () => {
+  it("contains exactly the twenty-two localized Home/Core Pages/Case Study URLs", () => {
     const locs = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
     expect(locs.sort()).toEqual(
       [
@@ -237,6 +238,8 @@ describe("P7/P9 — sitemap inventory", () => {
         "https://maestreparra.github.io/en/work/pilotorb-business-intelligence/",
         "https://maestreparra.github.io/es/proyectos/appliedxl-ai-data-platform/",
         "https://maestreparra.github.io/en/work/appliedxl-ai-data-platform/",
+        "https://maestreparra.github.io/es/proyectos/ronald-parra-digital-health-ecosystem/",
+        "https://maestreparra.github.io/en/work/ronald-parra-digital-health-ecosystem/",
       ].sort(),
     );
   });

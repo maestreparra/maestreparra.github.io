@@ -6,6 +6,7 @@ import { licendiMeecoCaseStudies, type LicendiMeecoCaseId } from "@/content/lice
 import type { SingleFlowCaseContent } from "@/content/single-flow-case";
 import { pilotorbCaseContent } from "@/content/pilotorb";
 import { appliedxlCaseContent } from "@/content/appliedxl";
+import { ronaldParraCaseContent } from "@/content/ronald-parra";
 
 /**
  * The approved public professional title (identical in both locales, per
@@ -143,4 +144,33 @@ export function buildPilotOrbStructuredData(locale: Locale): string {
 
 export function buildAppliedXLStructuredData(locale: Locale): string {
   return buildSingleFlowCaseStructuredData("appliedxl", appliedxlCaseContent, locale);
+}
+
+/**
+ * CreativeWork describes Gio's portfolio case, not the physician's medical
+ * services or the simulator itself. This keeps authorship and legal scope
+ * explicit while avoiding Product, MedicalBusiness, rating, or clinical
+ * outcome claims.
+ */
+export function buildRonaldParraCaseStructuredData(locale: Locale): string {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: localize(ronaldParraCaseContent.title, locale),
+    description: localize(ronaldParraCaseContent.introduction, locale),
+    url: getAbsoluteUrl(getRoutePath("ronald-parra", locale)),
+    inLanguage: locale,
+    dateModified: "2026-11-22",
+    author: {
+      "@type": "Person",
+      name: homeContent.brandName,
+    },
+    isPartOf: {
+      "@type": "WebSite",
+      name: homeContent.brandName,
+      url: getAbsoluteUrl("/"),
+    },
+  };
+
+  return JSON.stringify(data).replace(/</g, "\\u003c");
 }

@@ -21,7 +21,8 @@ export type PublicRouteKey =
   | "licendi"
   | "meeco"
   | "pilotorb"
-  | "appliedxl";
+  | "appliedxl"
+  | "ronald-parra";
 
 export interface PublicRouteEntry {
   key: PublicRouteKey;
@@ -34,7 +35,8 @@ export interface PublicRouteEntry {
     | "contact-links"
     | "case-study"
     | "derived-evidence-case-study"
-    | "single-flow-case-study";
+    | "single-flow-case-study"
+    | "healthcare-ecosystem-case-study";
 }
 
 export const publicRoutes: Record<PublicRouteKey, PublicRouteEntry> = {
@@ -97,6 +99,15 @@ export const publicRoutes: Record<PublicRouteKey, PublicRouteEntry> = {
     paths: { es: "/es/proyectos/appliedxl-ai-data-platform/", en: "/en/work/appliedxl-ai-data-platform/" },
     indexable: true,
     template: "single-flow-case-study",
+  },
+  "ronald-parra": {
+    key: "ronald-parra",
+    paths: {
+      es: "/es/proyectos/ronald-parra-digital-health-ecosystem/",
+      en: "/en/work/ronald-parra-digital-health-ecosystem/",
+    },
+    indexable: true,
+    template: "healthcare-ecosystem-case-study",
   },
 };
 

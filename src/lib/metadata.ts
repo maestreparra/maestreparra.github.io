@@ -109,6 +109,16 @@ const routeMetadataCopy: Record<PublicRouteKey, { title: Record<Locale, string>;
       en: "Case study covering discovery, information architecture, and data visualization for a B2B SaaS AI and scientific-data platform.",
     },
   },
+  "ronald-parra": {
+    title: {
+      es: "Dr. Ronald Parra: Product Design y UX Engineering | Giomar Maestre",
+      en: "Dr. Ronald Parra: Product Design & UX Engineering | Giomar Maestre",
+    },
+    description: {
+      es: "Caso de estudio sobre rebranding, consolidación web, SEO/AEO/GEO, privacidad e integración de un simulador clínico.",
+      en: "Case study covering rebranding, web consolidation, SEO/AEO/GEO, privacy, and clinical-simulator integration.",
+    },
+  },
 };
 
 /**
@@ -127,6 +137,7 @@ const socialImageSlug: Record<PublicRouteKey, string> = {
   meeco: "meeco",
   pilotorb: "pilotorb",
   appliedxl: "appliedxl",
+  "ronald-parra": "ronald-parra",
 };
 
 /**
@@ -146,7 +157,8 @@ export function buildRouteMetadata(routeKey: PublicRouteKey, locale: Locale): Me
           routeKey === "licendi" ||
           routeKey === "meeco" ||
           routeKey === "pilotorb" ||
-          routeKey === "appliedxl"
+          routeKey === "appliedxl" ||
+          routeKey === "ronald-parra"
         ? "article"
         : "website";
 

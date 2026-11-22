@@ -209,10 +209,10 @@ test.describe("P13 Section 9 — Licendi/MEECO evidence weight stays inside the 
   });
 });
 
-test.describe("P13 Section 11 — seven 1200x630 social preview assets exist and are referenced with absolute URLs", () => {
-  test("all seven PNG cards exist on disk at 1200x630", () => {
+test.describe("P13 Section 11 — social preview assets exist and are referenced with absolute URLs", () => {
+  test("all eight PNG cards exist on disk", () => {
     const dir = path.resolve(process.cwd(), "public/images/social");
-    for (const slug of ["home", "vitalink", "bm-envios", "licendi", "meeco", "pilotorb", "appliedxl"]) {
+    for (const slug of ["home", "vitalink", "bm-envios", "licendi", "meeco", "pilotorb", "appliedxl", "ronald-parra"]) {
       const filePath = path.join(dir, `${slug}.png`);
       expect(existsSync(filePath), `${slug}.png is missing`).toBe(true);
       expect(statSync(filePath).size).toBeGreaterThan(1000);
@@ -231,7 +231,7 @@ test.describe("P13 Section 11 — seven 1200x630 social preview assets exist and
 });
 
 test.describe("P13 Section 12 — public README lists every current route and case study", () => {
-  test("README references all six case-study route pairs and no private path", () => {
+  test("README references all seven case-study route pairs and no private path", () => {
     const readme = readFileSync(path.resolve(process.cwd(), "README.md"), "utf8");
     for (const slug of [
       "vitalink-digital-ecosystem",
@@ -240,6 +240,7 @@ test.describe("P13 Section 12 — public README lists every current route and ca
       "meeco-renewable-energy-website",
       "pilotorb-business-intelligence",
       "appliedxl-ai-data-platform",
+      "ronald-parra-digital-health-ecosystem",
     ]) {
       expect(readme).toContain(slug);
     }

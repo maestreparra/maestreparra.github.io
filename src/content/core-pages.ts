@@ -136,7 +136,7 @@ export interface WorkProjectContent {
    * study instead of the external repository (P9-QA: Work-card migration,
    * only once all four case-study routes exist).
    */
-  caseStudyRouteKey?: "vitalink" | "bm-envios" | "licendi" | "meeco" | "pilotorb" | "appliedxl";
+  caseStudyRouteKey?: "vitalink" | "bm-envios" | "licendi" | "meeco" | "pilotorb" | "appliedxl" | "ronald-parra";
 }
 
 export interface WorkContent {
@@ -170,6 +170,26 @@ export const workContent: WorkContent = {
     en: "Each status distinguishes published evidence from work that is still undergoing visual refinement.",
   },
   projects: [
+    {
+      id: "ronald-parra",
+      publicationStatus: "published",
+      status: { es: "CASO DOCUMENTADO · EN EVOLUCIÓN", en: "DOCUMENTED CASE · EVOLVING" },
+      title: {
+        es: "Dr. Ronald Parra Digital Health Ecosystem",
+        en: "Dr. Ronald Parra Digital Health Ecosystem",
+      },
+      summary: {
+        es: "Rebranding, UX Engineering, consolidación web, SEO/AEO/GEO, privacidad e integración de un simulador clínico para una práctica urológica.",
+        en: "Rebranding, UX engineering, web consolidation, SEO/AEO/GEO, privacy, and clinical-simulator integration for a urology practice.",
+      },
+      scope: {
+        es: "PRODUCT DESIGN · UX ENGINEERING · BRANDING · SEO/AEO/GEO · PRIVACIDAD",
+        en: "PRODUCT DESIGN · UX ENGINEERING · BRANDING · SEO/AEO/GEO · PRIVACY",
+      },
+      action: { es: "Ver caso completo", en: "Read the case study" },
+      repositoryUrl: "https://ronaldparra.com/",
+      caseStudyRouteKey: "ronald-parra",
+    },
     {
       id: "bm-envios",
       publicationStatus: "final-refinement",

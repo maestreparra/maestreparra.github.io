@@ -14,9 +14,8 @@ import path from "node:path";
 
 const outDir = path.resolve(process.cwd(), "out", "en");
 
-// Exactly the English route pages expected after adding PilotOrb: Home, the
-// three English Core Pages (About, Work, Contact), and the five English
-// case studies (VitaLink, BM Envios, Licendi, MEECO, PilotOrb).
+// Exactly the English route pages expected: Home, the three English Core
+// Pages (About, Work, Contact), and every localized case study.
 const EXPECTED_RELATIVE_PATHS = [
   "index.html",
   "about/index.html",
@@ -28,6 +27,7 @@ const EXPECTED_RELATIVE_PATHS = [
   "work/meeco-renewable-energy-website/index.html",
   "work/pilotorb-business-intelligence/index.html",
   "work/appliedxl-ai-data-platform/index.html",
+  "work/ronald-parra-digital-health-ecosystem/index.html",
 ].sort();
 
 async function walk(dir) {
